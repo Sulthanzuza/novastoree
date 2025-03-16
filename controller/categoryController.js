@@ -25,9 +25,7 @@ const showAddCategory = async (req, res) => {
 const addCategory = async (req, res) => {
   try {
     const { name, description, offers } = req.body;
-    
     const icon = req.file;
-
     if (!name || !description || !icon) {
       return res.status(400).json({ message: "All fields are required." });
     }

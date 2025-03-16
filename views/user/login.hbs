@@ -2,62 +2,91 @@
 <link rel="stylesheet" href="/userLogin.css">
 
 <title>{{title}}</title>
+
 <body>
-    {{> header }}
-
-    <div class="login">
-        <div class="text-center mb-4">Login</div>
-    </div>
-
-    <div class="form-section d-flex justify-content-center align-items-center">
-        <div class="login-container">
-            <div class="btnn">
-                <a href="/auth/google" class="btn btn-light mb-3 google-login">
-  <img src="/google.webp" alt="Google Icon" class="google-icon">
-  Login using Google
-</a>
+    {{>header}}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="login">
+                    <div class="text-center mb-4">Login</div>
+                </div>
             </div>
-            <div class="text-center my-3 text-muted">OR</div>
-           
-
-            
-            <form id="login-form" method="POST" action="/login">
-                
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
-                </div>
-
-                
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
-                </div>
-
-                
-                <div class="d-flex justify-content-between mb-3">
-                    <div class="for">
-                        <a href="/forgot-password" class="text-muted text-decoration-none" style="font-weight: 700;">Forgot Password?</a>
+        </div>
+        
+        <div class="row">
+            <div class="col-12">
+                <div class="form-section d-flex justify-content-center align-items-center">
+                    <div class="login-container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="btnn">
+                                    <a href="/auth/google" class="btn btn-light mb-3 google-login">
+                                        <img src="/google.webp" alt="Google Icon" class="google-icon">
+                                        Login using Google
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="text-center my-3 text-muted">OR</div>
+                            </div>
+                        </div>
+                        
+                        <form id="login-form" method="POST" action="/login">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="mb-3">
+                                        <label for="password" class="form-label">Password</label>
+                                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="d-flex justify-content-between mb-3">
+                                        <div class="for">
+                                            <a href="/forgot-password" class="text-muted text-decoration-none" style="font-weight: 700;">Forgot Password?</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="btnn">
+                                        <button type="submit" class="btn btn-dark w-100">Login</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="text-center mt-3">
+                                    <span>Don't have an account? <a href="/signup" class="text-primary text-decoration-none">Sign up</a></span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                
-                <div class="btnn">
-                    <button type="submit" class="btn btn-dark w-100">Login</button>
-                </div>
-            </form>
-
-            
-            <div class="text-center mt-3">
-                <span>Don't have an account? <a href="/signup" class="text-primary text-decoration-none">Sign up</a></span>
             </div>
         </div>
     </div>
 
-    {{> footer }}
-
-
-
+{{>footer}}
 <script>
     document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('login-form');

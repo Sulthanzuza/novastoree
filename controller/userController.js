@@ -163,7 +163,9 @@ const login = async (req, res) => {
         const { email, password } = req.body;
 
         const user = await User.findOne({ email });
+
         const userName = user.firstName;
+        
         if (!user) {
             return res.status(404).render('user/login', { message: "User does not exist" });
         }
@@ -181,42 +183,42 @@ const login = async (req, res) => {
             return res.status(400).render('user/login', { message: "Incorrect password" });
         }
 
-//         const mailOptions = {
-//             from: process.env.EMAIL_USER,
-//             to: email,
-//             subject: 'Login Alert',
-//             text: `Hi ${userName},
+        const mailOptions = {
+            from: process.env.EMAIL_USER,
+            to: email,
+            subject: 'Login Alert',
+            text: `Hi ${userName},
 
-// We noticed a successful login to your account on NOVA Store.
+We noticed a successful login to your account on NOVA Store.
 
-// Login Details:
+Login Details:
 
-// Date & Time: ${date}
+Date & Time: ${date}
 
-// If this was you, no further action is required.
-// However, if you did not initiate this login, please reset your password immediately or contact our support team.
+If this was you, no further action is required.
+However, if you did not initiate this login, please reset your password immediately or contact our support team.
 
 
 
-// We prioritize your security and are always here to help!
-// Enjoy shopping `,
-//         };
+We prioritize your security and are always here to help!
+Enjoy shopping `,
+        };
 
         
-//         const sendEmail = (mailOptions) => {
-//             return new Promise((resolve, reject) => {
-//                 transporter.sendMail(mailOptions, (error, info) => {
-//                     if (error) {
-//                         reject('Failed to sent Email');
-//                     } else {
-//                         resolve(info);
-//                     }
-//                 });
-//             });
-//         };
+        const sendEmail = (mailOptions) => {
+            return new Promise((resolve, reject) => {
+                transporter.sendMail(mailOptions, (error, info) => {
+                    if (error) {
+                        reject('Failed to sent Email');
+                    } else {
+                        resolve(info);
+                    }
+                });
+            });
+        };
         
         try {
-            // await sendEmail(mailOptions);
+             await sendEmail(mailOptions);
 
             req.session.user = {
                 id: user._id,
@@ -224,7 +226,7 @@ const login = async (req, res) => {
             }; 
     
             
-            res.status(200).redirect('/home');
+            res.status(200).redirect('/');
 
         } catch (error) {
             console.error('Error sending email:', error);

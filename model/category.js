@@ -21,7 +21,7 @@ const CategorySchema = new mongoose.Schema(
       trim: true,
       validate: {
         validator: function (v) {
-          return /\.(jpg|jpeg|png|gif)$/.test(v); 
+          return /\.(jpg|jpeg|png|gif|webp)$/.test(v); 
         },
         message: (props) => `${props.value} is not a valid image format!`,
       },
