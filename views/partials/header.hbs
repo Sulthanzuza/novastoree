@@ -1,0 +1,45 @@
+<link rel="stylesheet" href="/header.css"> 
+ 
+ <nav class="navbar navbar-expand-lg navbar-light bg-white px-3">
+        <a class="navbar-brand" href="/home">
+          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/c2afe0f0cdbaa19710f0148c444fc17107728b923519885aded52f98886ee7b2" width="143" alt="Logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav" style="font: 500 14px/25px Inter, sans-serif">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item"><a class="nav-link" href="/home">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/list-products">Shop</a></li>
+                <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+              
+            </ul>
+            <div class="d-flex align-items-center gap-3">
+                <a href="/cart" class="position-relative">
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/ca105daf03326e0b61139d5de16e8c17f2d4065cfdc7f698b9703d5efcff6646" width="22" alt="Cart">
+                    <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge bg-danger rounded-pill">0</span>
+                </a>
+                <a href="/profile">
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/7bfa36a84a4a37bb46278c229933652ddd8bef9692fccbf7dd713662418b6d7d" width="24" alt="User">
+                </a>
+            </div>
+        </div>
+    </nav>
+<script>
+document.addEventListener("DOMContentLoaded", async function () {
+    const cartCountElement = document.getElementById("cart-count");
+
+    try {
+        const response = await fetch("/cart/count"); 
+        const data = await response.json();
+        if (data.count > 0) {
+            cartCountElement.textContent = data.count;
+            cartCountElement.style.display = "flex"; 
+        } else {
+            cartCountElement.style.display = "none"; 
+        }
+    } catch (error) {
+        console.error("Error fetching cart count:", error);
+    }
+});
+</script>

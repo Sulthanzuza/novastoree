@@ -1,0 +1,235 @@
+
+<link rel="stylesheet" href="/profile.css">
+<title>{{title}}</title>
+<style>
+  .form-control {
+    border-top: none;
+    border-right: none;
+    border-left: none;
+  }
+</style>
+
+{{>header}}
+<div class="account-settings">
+  <div class="breadcrumb-container">
+    <div class="breadcrumb">My Account</div>
+  </div>
+  <div class="div">
+    <div class="div-2">
+      <div class="column">
+        <!-- Navigation Menu -->
+        <div class="nav-menu">
+          <a href="/profile" class="dash-item" role="menuitem">
+            <span class="nav-icon">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/36d3139b558d31db9598872114ecb55879edd429326bba16ca12c3c8b6743ef0?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                alt="Profile icon" />
+            </span>
+            <span class="nav-text">Profile</span>
+          </a>
+
+          <a href="/order" class="prod-item" role="menuitem">
+            <span class="nav-icon">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/395e632ba7027a03ce2c35c1aa8bcc4534da249d8c136cdcc01b5043a72ddc87?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                alt="Orders icon" />
+            </span>
+            <span class="nav-text">Order</span>
+          </a>
+          <a href="/pending-order" class="prod-item" role="menuitem">
+            <span class="nav-icon">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/395e632ba7027a03ce2c35c1aa8bcc4534da249d8c136cdcc01b5043a72ddc87?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                alt="Orders icon" />
+            </span>
+            <span class="nav-text">Pending Order</span>
+          </a>
+
+          <a href="/wishlist" class="cat-item" role="menuitem">
+            <span class="nav-icon">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/8a28c72b03fe521e80b17a2210cccff5ffde375083a47fae478a483188a2bd02?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                alt="Wishlist icon" />
+            </span>
+            <span class="nav-text">Wishlist</span>
+          </a>
+
+          <a href="/address" class="ord-item" role="menuitem">
+            <span class="nav-icon">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/a50f54cfc6598fef60cf27a23db31d7b328cf5d8d569954100ba71931392d542?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                alt="Address icon" />
+            </span>
+            <span class="nav-text">Address</span>
+          </a>
+
+
+
+         
+
+          <a href="/wallet" class="bar-item" role="menuitem">
+            <span class="nav-icon">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/10908ff884c9211705e8ffa2b601e07e65a50d110f2c30258724ccff7cdc8f6f?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                alt="Wallet icon" />
+            </span>
+            <span class="nav-text">Wallet</span>
+          </a>
+
+
+
+          <a href="/logout" class="off-item" role="menuitem">
+            <span class="nav-icon">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/4f856bcd1032ee84fdc55e3f39d0250e6c0c4fb806bf9cd49f1b72879d1c95e8?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                alt="Logout icon" width="24" height="24" loading="lazy">
+            </span>
+            <span class="nav-text">Logout</span>
+          </a>
+        </div>
+      </div>
+      <div class="main">
+        <h2 class="text-center">Add Address</h2>
+        <div class="form-group-row " style=" margin-top:30px">
+          <form action="/edit-address/{{address._id}}" method="POST" id="address-form">
+            <div class="mb-3">
+              <label for="name" class="form-label">Full Name</label>
+              <input type="name" id="name" name="name" class="form-control" value="{{address.fullName}}">
+            </div>
+            <div class="mb-3">
+              <label for="number" class="form-label">Phone Number</label>
+              <input id="number" name="mumber" class="form-control" value="{{address.phoneNumber}}">
+            </div>
+
+            <div class="mb-3">
+              <label for="address" class="form-label">House Address</label>
+              <input type="text" id="address" name="houseAddress" class="form-control" value="{{address.houseAddress}}">
+            </div>
+            <div class="mb-3">
+              <label for="street-address" class="form-label">Street Address</label>
+              <input type="text" id="street-address" name="streetAddress" class="form-control" value="{{address.streetAddress}}">
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="city" class="form-label">City</label>
+                <input type="text" id="city" name="city" class="form-control" value="{{address.city}}">
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="state" class="form-label">State</label>
+                <input type="text" id="state" name="state" class="form-control" value="{{address.state}}">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="zip-code" class="form-label">Zip Code</label>
+                <input type="text" id="zip-code" name="zipCode" class="form-control" value="{{address.zipCode}}">
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="country" class="form-label">Country</label>
+                <input type="text" id="country" name="country" class="form-control" value="{{address.country}}">
+              </div>
+            </div>
+            <button type="submit" class="btn btn-dark w-100" style="margin-top:30px; border-color:#373b3e">Add
+              Address</button>
+          </form>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{>footer}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  document.getElementById('address-form').addEventListener('submit', async (e) => {
+  e.preventDefault(); 
+
+ 
+  const formData = {
+    fullName: document.getElementById('name').value,
+    phoneNumber: document.getElementById('number').value,
+    houseAddress: document.getElementById('address').value,
+    streetAddress: document.getElementById('street-address').value,
+    city: document.getElementById('city').value,
+    state: document.getElementById('state').value,
+    zipCode: document.getElementById('zip-code').value,
+    country: document.getElementById('country').value,
+  };
+
+ 
+  for (let key in formData) {
+    if (formData[key].trim() === '') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Validation Error',
+        text: `Please fill in the ${key.replace(/([A-Z])/g, ' $1').toLowerCase()} field.`,
+      });
+      return; 
+    }
+  }
+
+  
+  const phoneRegex = /^[0-9]{10}$/;
+  if (!phoneRegex.test(formData.phoneNumber)) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Invalid Phone Number',
+      text: 'Phone number must be exactly 10 digits.',
+    });
+    return;
+  }
+
+ 
+  const zipRegex = /^[0-9]{6}$/;
+  if (!zipRegex.test(formData.zipCode)) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Invalid Zip Code',
+      text: 'Zip code must be exactly 6 digits.',
+    });
+    return;
+  }
+
+  try {
+    const response = await fetch(`/edit-address/{{address._id}}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+  
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: result.message || 'Address updated successfully.',
+      }).then(() => {
+      
+        window.location.href = '/address'; 
+      });
+    } else {
+
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: result.message || 'Error updating address.',
+      });
+    }
+  } catch (error) {
+    console.error('Request failed', error);
+    Swal.fire({
+      icon: 'error',
+      title: 'Unexpected Error',
+      text: 'An unexpected error occurred. Please try again.',
+    });
+  }
+});
+
+</script>

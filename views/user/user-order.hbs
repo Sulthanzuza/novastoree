@@ -1,0 +1,232 @@
+<link rel="stylesheet" href="/profile.css">
+<title>{{title}}</title>
+{{>header}}
+<div class="account-settings">
+  <div class="breadcrumb-container">
+    <div class="breadcrumb">My Account</div>
+  </div>
+  <div class="div">
+    <div class="div-2">
+      <div class="column">
+        <div class="nav-menu" style="margin-top: 0%;">
+          <div class="nav-menu">
+            <a href="/profile" class="dash-item" role="menuitem">
+              <span class="nav-icon">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/36d3139b558d31db9598872114ecb55879edd429326bba16ca12c3c8b6743ef0?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                  alt="Profile icon" />
+              </span>
+              <span class="nav-text">Profile</span>
+            </a>
+
+            <a href="/order" class="prod-item" role="menuitem">
+              <span class="nav-icon">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/395e632ba7027a03ce2c35c1aa8bcc4534da249d8c136cdcc01b5043a72ddc87?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                  alt="Orders icon" />
+              </span>
+              <span class="nav-text">Order</span>
+            </a>
+            <a href="/pending-order" class="prod-item" role="menuitem">
+            <span class="nav-icon">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/395e632ba7027a03ce2c35c1aa8bcc4534da249d8c136cdcc01b5043a72ddc87?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                alt="Orders icon" />
+            </span>
+            <span class="nav-text">Pending Order</span>
+          </a>
+
+            <a href="/wishlist" class="cat-item" role="menuitem">
+              <span class="nav-icon">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/8a28c72b03fe521e80b17a2210cccff5ffde375083a47fae478a483188a2bd02?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                  alt="Wishlist icon" />
+              </span>
+              <span class="nav-text">Wishlist</span>
+            </a>
+
+            <a href="/address" class="ord-item" role="menuitem">
+              <span class="nav-icon">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/a50f54cfc6598fef60cf27a23db31d7b328cf5d8d569954100ba71931392d542?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                  alt="Address icon" />
+              </span>
+              <span class="nav-text">Address</span>
+            </a>
+
+
+
+           
+
+            <a href="/wallet" class="bar-item" role="menuitem">
+              <span class="nav-icon">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/10908ff884c9211705e8ffa2b601e07e65a50d110f2c30258724ccff7cdc8f6f?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                  alt="Wallet icon" />
+              </span>
+              <span class="nav-text">Wallet</span>
+            </a>
+
+
+
+            <a href="/logout" class="off-item" role="menuitem">
+              <span class="nav-icon">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/4f856bcd1032ee84fdc55e3f39d0250e6c0c4fb806bf9cd49f1b72879d1c95e8?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                  alt="Logout icon" width="24" height="24" loading="lazy">
+              </span>
+              <span class="nav-text">Logout</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="main">
+        <div class="container" style="width: 100%;">
+          <h1 class="text-center pb-4">ALL ORDERS</h1>
+{{#if orders.length}}
+          {{#each orders}}
+          <div class="grid gap-1 d-flex justify-content-between border bg-light p-3">
+            <div class="col-2 text-center p-2">
+              <div>
+                <img style="width:100px" src="/uploads/{{this.mainProduct.productImage}}" alt="">
+              </div>
+            </div>
+            <div class="col-4">
+              <p class="product-name">{{this.mainProduct.productName}}{{#if this.extraProductsCount}} + {{this.extraProductsCount}} more{{/if}}</p>
+              <span class="order-date">Ordered on: {{this.createdAt}}</span>
+              <p class="product-price"> ₹{{this.totalPrice}}</p>
+            </div>
+           
+            <div class="col-4 d-flex align-items-center">
+              <a href="/order-details/{{this.orderId}}">
+                <div class="p-2"><button type="button" style=" border-color:#5c5f6a;" class="btn btn-outline-primary px-3">View</button>
+              </a>
+            </div>
+              
+           
+
+
+
+          </div>
+        </div>
+        {{/each}}
+        {{else}}
+
+  <div class="text-center mt-4">
+    <h4>No Orders</h4>
+    <p>It looks like you have no  orders at the moment.</p>
+    
+  </div>
+{{/if}}
+        <!-- Pagination if applicable -->
+          <div class="pagination">
+    {{#if (gt currentPage 1)}}
+      <a href="?page={{dec currentPage}}">Previous</a>
+    {{/if}}
+
+    {{#each (range 1 totalPages) as |pageNumber|}}
+      <a href="?page={{pageNumber}}">{{pageNumber}}</a>
+    {{/each}}
+
+    {{#if (lt currentPage totalPages)}}
+      <a href="?page={{increment currentPage}}">Next</a>
+    {{/if}}
+  </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{{>footer}}
+
+
+<script>
+
+  document.querySelectorAll('.cancel-btn, .return-btn').forEach(button => {
+    button.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const orderId = e.target.dataset.orderId;
+      const orderStatus = e.target.dataset.orderStatus.toLowerCase();
+      const buttonElement = e.target;
+
+      let actionType = 'cancel';
+      let endpoint = `/cancel-order/${orderId}`;
+      let confirmationText = 'Do you really want to cancel this order?';
+      let successText = 'Order cancelled successfully';
+
+
+      if (orderStatus === 'delivered') {
+        actionType = 'return';
+        endpoint = `/return-order/${orderId}`;
+        confirmationText = 'Do you want to request a return for this order?';
+        successText = 'Return request submitted successfully';
+      
+      }
+
+     
+      const { isConfirmed } = await Swal.fire({
+        title: `Confirm ${actionType.charAt(0).toUpperCase() + actionType.slice(1)}?`,
+        text: confirmationText,
+        icon: actionType === 'cancel' ? 'warning' : 'question',
+        showCancelButton: true,
+        confirmButtonText: `Yes, ${actionType} it!`,
+        cancelButtonText: 'No'
+      });
+
+  
+      if (isConfirmed) {
+        try {
+          const response = await fetch(endpoint, { method: 'POST' });
+          const result = await response.json();
+
+    
+          if (response.ok) {
+            Swal.fire({
+              title: 'Success!',
+              text: successText,
+              icon: 'success',
+              confirmButtonText: 'OK'
+            });
+
+          
+            if (actionType === 'return') {
+              buttonElement.textContent = 'Returned';
+              buttonElement.disabled = true;
+            } else {
+              buttonElement.textContent = 'Cancelled';
+              buttonElement.disabled = true;
+            }
+          } else {
+            
+            Swal.fire({
+              title: 'Error!',
+              text: result.message || 'Something went wrong!',
+              icon: 'error',
+              confirmButtonText: 'Try Again'
+            });
+          }
+        } catch (error) {
+        
+          Swal.fire({
+            title: 'Error!',
+            text: `An error occurred while processing the ${actionType} request.`,
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
+        }
+      }
+    });
+  });
+
+  
+  document.querySelectorAll('.cancel-btn, .return-btn').forEach(button => {
+    const orderStatus = button.dataset.orderStatus.toLowerCase();
+    
+    
+    if (orderStatus === 'delivered') {
+      button.textContent = 'Return';
+      button.classList.remove('btn-outline-danger');
+      button.classList.add('btn-outline-primary');
+    }
+  });
+</script>

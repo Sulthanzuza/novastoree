@@ -1,0 +1,361 @@
+<head>
+  <link rel="stylesheet" href="/dashboard.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <title>{{title}}</title>
+</head>
+
+{{>dashp}}
+<div class="products-containers">
+  <div class="layout-wrappers" >
+    <main class="main-contents">
+      <header class="headers">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <span class="breadcrumb-text">Admin</span>
+          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/347fc193d0088dca0695d99147b3700ee95d8efb9ecfa3c2f8ce353113eebee3?placeholderIfAbsent=true&apiKey=d7cebeeadab64378ab4fc611373387df" alt="" />
+          <span class="breadcrumb-text breadcrumb-active">Dashboard</span>
+        </nav>
+        <a class="logout-button" aria-label="Logout" href="/admin/logout">
+          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/434f453e4cc985013ba5977dc6c3ec92bd5cb52d93cf0e330a3970e94bfbd360?placeholderIfAbsent=true&apiKey=d7cebeeadab64378ab4fc611373387df" alt="" />
+        </a>
+      </header>
+
+      <section class="products-grid">
+        <div class="row m-0">
+          <div class="containerboxcat mt-4 p-4">
+            <!-- First row with metrics -->
+            <div class="row d-flex justify-content-evenly mb-4">
+              <!-- Bar Chart (Total Sales) -->
+              <div class="containerbox col-md-10">
+                <div class="row">
+                  <a href="/admin/sales-report" style="text-decoration:none; color:black;">
+                    <div class="col-md-6 ps-4">
+                      <h5>Total Sales</h5>
+                      <p style="font-size: small;">THIS MONTH</p>
+                    </div>
+                  </a>
+                  <div class="col-md-6 align-self-center">
+                 <p class="fs-4 text-center">Rs. {{toFixed lastMonthlySales 2}}</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="chart-container">
+                    <canvas id="barchart"></canvas>
+                  </div>
+                </div>
+              </div>
+
+           
+            
+
+              <!-- Progress (Orders) -->
+              <div class="containerbox col-md-4 m-5">
+                <div class="row">
+                  <a href="/admin/sales-report" style="text-decoration:none; color:black;">
+                    <div class="col-md-6 ps-4">
+                      <h5>Orders</h5>
+                      <p style="font-size: small;">Monthly Goals: 1,000</p>
+                    </div>
+                    <div class="col-md-6 align-self-center">
+                      <!-- Order count display -->
+                    </div>
+                  </a>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 ps-4 ">
+                    <div class="orderprogress mt-5">
+                      <p>{{subtract 10 lastMonthlyOrders}} left</p>
+                      <div class="progress" role="progressbar" aria-label="Example 15px high"
+                          aria-valuemin="0" aria-valuemax="100" style="height: 15px">
+                        <div class="progress-bar" style="width: {{multiply (divide lastMonthlyOrders 10) 100}}%"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+                            <div class="containerbox col-md-4 m-5">
+                <div class="row">
+                  <a href="/admin/sales-report" style="text-decoration:none; color:black;">
+                    <div class="col-md-6 ps-4">
+                      <h5>Customers</h5>
+                      <p style="font-size: small;">THIS MONTH</p>
+                    </div>
+                    <div class="col-md-6 align-self-center">
+                      <p class="fs-4 text-center">{{lastMonthlyCustomers}}</p>
+                    </div>
+                  </a>
+                </div>
+                <div class="row">
+                  <div class="chart-container">
+                    <canvas id="linechart"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Second row with category pie chart and top selling products -->
+            <div class="row mt-4">
+              <!-- Category Pie Chart -->
+              <div class="col-md-6">
+                <div class="containerbox">
+                  <h5 class="mb-3 ps-2">Category Distribution</h5>
+                  <div class="category-chart-container">
+                    <canvas id="categoryPieChart"></canvas>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Top Selling Products -->
+              <div class="col-md-6">
+                <div class="containerbox">
+                  <h5 class="mb-3 ps-2">Top Selling Products</h5>
+                  <ul class="list-unstyled">
+                    {{#each topSellingProducts}}
+                    <li class="d-flex align-items-center gap-3 mb-3 p-2 border-bottom">
+                      <img src="/uploads/{{this.productInfo.image.[0]}}" alt="{{this.productInfo.name}}" width="50" height="50" style="border-radius: 5px; object-fit: cover;">
+                      <div class="flex-grow-1">
+                        <strong class="d-block">{{this.productInfo.name}}</strong>
+                        <span class="text-muted">Sold: <strong>{{this.totalSold}}</strong></span>
+                      </div>
+                    </li>
+                    {{/each}}
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            
+            <div class="row mt-4">
+              <div class="col-md-12">
+                <div class="containerbox">
+                  <h5 class="mb-3 ps-2">Top Selling Categories</h5>
+                  <div class="row">
+                    {{#each topSellingCategories}}
+                    <div class="col-md-3 mb-3">
+                      <div class="p-3 border rounded text-center">
+                        <h6>{{this._id}}</h6>
+                        <div class="badge bg-primary">Sold: {{this.totalSold}}</div>
+                      </div>
+                    </div>
+                    {{/each}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+
+    var monthlySalesLabels = JSON.parse('{{{monthlySalesLabels}}}'); 
+    var monthlySalesData = JSON.parse('{{{monthlySalesData}}}');
+    
+    var salesData = {
+      labels: monthlySalesLabels, 
+      datasets: [{
+        label: "Total Sales (₹)",
+        backgroundColor: "rgba(54, 162, 235, 0.6)",
+        borderColor: "rgba(54, 162, 235, 1)",
+        borderWidth: 2,
+        hoverBackgroundColor: "rgba(54, 162, 235, 0.8)",
+        hoverBorderColor: "rgba(54, 162, 235, 1)",
+        data: monthlySalesData, 
+      }]
+    };
+
+    new Chart(document.getElementById("barchart"), {
+      type: 'bar',
+      data: salesData,
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: { beginAtZero: true },
+          x: { grid: { display: false } }
+        }
+      }
+    });
+    
+ const ctx = document.getElementById('linechart').getContext('2d');
+  
+  
+  const monthlyCustomersData = JSON.parse('{{{monthlyCustomersData}}}');
+  
+
+  const currentDate = new Date();
+  const currentMonth = currentDate.getMonth(); 
+  
+ 
+  const monthLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  
+  
+  let chartLabels = [];
+  for (let i = 11; i >= 0; i--) {
+   
+    let monthIndex = (currentMonth - i + 12) % 12;
+    chartLabels.push(monthLabels[monthIndex]);
+  }
+  
+ 
+  chartLabels = chartLabels.slice(12 - monthlyCustomersData.length);
+  
+ 
+  const customerChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: chartLabels,
+      datasets: [{
+        label: 'Monthly New Customers',
+        data: monthlyCustomersData,
+        fill: false,
+        borderColor: 'rgb(54, 162, 235)',
+        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+        tension: 0.1,
+        pointBackgroundColor: 'rgb(54, 162, 235)',
+        pointRadius: 5,
+        pointHoverRadius: 7,
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: 'top',
+          labels: {
+            font: {
+              size: 12
+            }
+          }
+        },
+        tooltip: {
+          backgroundColor: 'rgba(0, 0, 0, 0.7)',
+          titleFont: {
+            size: 14,
+            weight: 'bold'
+          },
+          bodyFont: {
+            size: 13
+          },
+          callbacks: {
+            title: function(tooltipItems) {
+              return tooltipItems[0].label;
+            },
+            label: function(context) {
+              return 'New Customers: ' + context.raw;
+            }
+          }
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          grid: {
+            color: 'rgba(0, 0, 0, 0.1)'
+          },
+          ticks: {
+            precision: 0
+          },
+          title: {
+            display: true,
+            text: 'Number of New Customers',
+            font: {
+              size: 14,
+              weight: 'bold'
+            }
+          }
+        },
+        x: {
+          grid: { 
+            display: false 
+          },
+          title: {
+            display: true,
+            text: 'Month',
+            font: {
+              size: 14,
+              weight: 'bold'
+            }
+          }
+        }
+      }
+    }
+  });
+   
+    var categoryData = {
+      labels: [
+        {{#each topSellingCategories}}
+        '{{this._id}}',
+        {{/each}}
+      ],
+      datasets: [{
+        data: [
+          {{#each topSellingCategories}}
+          {{this.totalSold}},
+          {{/each}}
+        
+        ],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.7)',
+          'rgba(54, 162, 235, 0.7)',
+          'rgba(255, 206, 86, 0.7)',
+          'rgba(75, 192, 192, 0.7)',
+          'rgba(153, 102, 255, 0.7)',
+          'rgba(255, 159, 64, 0.7)',
+          'rgba(199, 199, 199, 0.7)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(199, 199, 199, 1)'
+        ],
+        borderWidth: 1
+      }]
+    };
+
+    new Chart(document.getElementById("categoryPieChart"), {
+      type: 'pie',
+      data: categoryData,
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'right',
+            labels: {
+              boxWidth: 15,
+              padding: 15
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                var label = context.label || '';
+                var value = context.raw || 0;
+                var total = context.dataset.data.reduce((a, b) => a + b, 0);
+                var percentage = Math.round((value / total) * 100);
+                return label + ': ' + value + ' (' + percentage + '%)';
+              }
+            }
+          }
+        }
+      }
+    });
+  });
+</script>

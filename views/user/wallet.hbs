@@ -1,0 +1,389 @@
+<link rel="stylesheet" href="/profile.css">
+
+
+<title>{{title}}</title>
+
+
+{{>header}}
+<div class="account-settings">
+  <div class="breadcrumb-container">
+    <div class="breadcrumb">My Account</div>
+  </div>
+  <div class="div">
+    <div class="div-2">
+      <div class="column">
+        <!-- Navigation Menu -->
+        <div class="nav-menu">
+          <a href="/profile" class="dash-item" role="menuitem">
+            <span class="nav-icon">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/36d3139b558d31db9598872114ecb55879edd429326bba16ca12c3c8b6743ef0?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                alt="Profile icon" />
+            </span>
+            <span class="nav-text">Profile</span>
+          </a>
+
+          <a href="/order" class="prod-item" role="menuitem">
+            <span class="nav-icon">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/395e632ba7027a03ce2c35c1aa8bcc4534da249d8c136cdcc01b5043a72ddc87?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                alt="Orders icon" />
+            </span>
+            <span class="nav-text">Order</span>
+          </a>
+          <a href="/pending-order" class="prod-item" role="menuitem">
+            <span class="nav-icon">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/395e632ba7027a03ce2c35c1aa8bcc4534da249d8c136cdcc01b5043a72ddc87?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                alt="Orders icon" />
+            </span>
+            <span class="nav-text">Pending Order</span>
+          </a>
+
+          <a href="/wishlist" class="cat-item" role="menuitem">
+            <span class="nav-icon">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/8a28c72b03fe521e80b17a2210cccff5ffde375083a47fae478a483188a2bd02?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                alt="Wishlist icon" />
+            </span>
+            <span class="nav-text">Wishlist</span>
+          </a>
+
+          <a href="/address" class="ord-item" role="menuitem">
+            <span class="nav-icon">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/a50f54cfc6598fef60cf27a23db31d7b328cf5d8d569954100ba71931392d542?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                alt="Address icon" />
+            </span>
+            <span class="nav-text">Address</span>
+          </a>
+
+
+
+
+
+          <a href="/wallet" class="bar-item" role="menuitem">
+            <span class="nav-icon">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/10908ff884c9211705e8ffa2b601e07e65a50d110f2c30258724ccff7cdc8f6f?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                alt="Wallet icon" />
+            </span>
+            <span class="nav-text">Wallet</span>
+          </a>
+
+
+
+          <a href="/logout" class="off-item" role="menuitem">
+            <span class="nav-icon">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/4f856bcd1032ee84fdc55e3f39d0250e6c0c4fb806bf9cd49f1b72879d1c95e8?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                alt="Logout icon" width="24" height="24" loading="lazy">
+            </span>
+            <span class="nav-text">Logout</span>
+          </a>
+        </div>
+      </div>
+      <div class="main">
+
+        <div class="form-group-row " style=" margin-top:30px">
+          <div id="signup-form" style="margin-left:1%; ">
+            <h1 class="text-center">WALLET</h1>
+            <div class="col-md-4 mb-4">
+              <div class="credit-card bg-warning text-dark p-4 d-flex flex-column justify-content-between"
+                style="float:left;">
+                <div class="d-flex justify-content-between align-items-center">
+                  <h4>Gold Card</h4>
+                  <i class="fab fa-cc-mastercard fa-2x"></i>
+                </div>
+                <div class="card-number my-3 wallet-balance">
+                  Rs.{{wallet.balance}}
+                </div>
+                <div class="d-flex justify-content-between">
+                  <div>
+
+                    <div class="card-holder">{{user.firstName}} {{user.lastName}}</div>
+
+                  </div>
+                  <img src="https://www.svgrepo.com/show/362035/visa-3.svg" alt="Chip" width="40">
+                </div>
+
+              </div>
+
+            </div>
+            <div style="margin-left:110%; margin-top:30%;">
+  <button type="button" class="btn btn-danger" id="add-money-btn">Add Money</button>
+  <div id="amount-input-container" style="display:none; margin-top: 10px;">
+    <input type="number" id="amount" placeholder="Enter amount" min="1" required>
+    <button type="button" class="btn btn-primary " id="submit-amount">Submit</button>
+  </div>
+</div>
+
+              
+          </div>
+        </div>
+      <div style="margin-left: 10%; margin-right: 10%;">
+        <h5>Recent Transactions <hr></h5>
+    {{#each wallet.transactions}}
+    <div class="transaction-item d-flex justify-content-between align-items-center">
+        <div class="d-flex">
+            <div class="transaction-type mr-3">
+                {{#if (eq this.type 'Credit')}}
+                    <span class="text-success">Credited</span>
+                {{else}}
+                    <span class="text-danger">Debited</span>
+                {{/if}}
+            </div>
+          <div class="transaction-amount mr-3">
+    <h6>Rs. {{toFixed this.amount 2}}</h6>
+   
+</div>
+ <p style="font-size:smaller">{{this.description}}</p>
+        </div>
+       <div class="transaction-date" data-date="{{this.createdAt}}">
+            <!-- The date will be formatted by the script -->
+        </div>
+    </div>
+    <hr>
+    {{/each}}
+</div>
+
+
+
+
+      </div>
+
+    </div>
+  </div>
+</div>
+{{>footer}}
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    
+    document.querySelectorAll('.transaction-date').forEach(function (element) {
+        const rawDate = element.getAttribute('data-date');
+        const formattedDate = new Date(rawDate).toLocaleDateString('en-US', {
+            weekday: 'short', 
+            month: 'short',   
+            day: '2-digit',  
+            year: 'numeric'   
+        });
+        element.textContent = formattedDate; 
+    });
+
+  
+    document.getElementById('add-money-btn').addEventListener('click', function() {
+        document.getElementById('amount-input-container').style.display = 'block';
+    });
+
+    
+    document.getElementById('submit-amount').addEventListener('click', async function() {
+        const amountInput = document.getElementById('amount');
+        const amount = amountInput.value;
+
+        if (amount && amount > 0) {
+            try {
+            
+                const response = await fetch('/create-order', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ amount })
+                });
+
+                const data = await response.json();
+
+                if (data.id) {
+                    
+                    const keyResponse = await fetch('/razorpay-key');
+                    const keyData = await keyResponse.json();
+                    const key = keyData.key;
+
+                  
+                    const options = {
+                        key: key,
+                        amount: amount * 100,
+                        currency: 'INR',
+                        order_id: data.id,
+                        name: 'Add Money to Wallet',
+                        description: 'Transaction for wallet',
+                        image: 'https://your-logo-url.com/logo.png',
+                        handler: function (paymentResponse) {
+                           
+                            fetch('/update-wallet', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify({ amount: amount })
+                            })
+                            .then(response => response.json())
+                            .then(walletData => {
+                                if (walletData.success) {
+                                   
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Payment Successful!',
+                                        text: 'Your payment has been processed successfully.',
+                                        confirmButtonText: 'OK',
+                                    });
+                                    
+                                   
+                                    
+                                   
+                                    updateWalletUI(amount, walletData.balance);
+                                    
+                                    amountInput.value = '';
+                                    document.getElementById('amount-input-container').style.display = 'none';
+                                } else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Error',
+                                        text: 'Failed to update wallet balance.',
+                                        confirmButtonText: 'OK',
+                                    });
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error updating wallet:', error);
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: 'An unexpected error occurred while updating wallet.',
+                                    confirmButtonText: 'OK',
+                                });
+                            });
+                        },
+                        prefill: {
+                            name: 'User Name',
+                            email: 'user@example.com',
+                            contact: '9876543210',
+                        },
+                        theme: {
+                            color: '#F37254'
+                        }
+                    };
+
+                    const rzp = new Razorpay(options);
+                    rzp.open();
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Payment Failed',
+                        text: 'Failed to create payment order.',
+                        confirmButtonText: 'Try Again',
+                    });
+                }
+            } catch (error) {
+                console.error('Error in payment process:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'An unexpected error occurred.',
+                    confirmButtonText: 'OK',
+                });
+            }
+        } else {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Invalid Amount',
+                text: 'Please enter a valid amount.',
+                confirmButtonText: 'OK',
+            });
+        }
+    });
+
+
+    function updateWalletUI(amount, newBalance) {
+      
+        const numAmount = parseFloat(amount);
+        const numBalance = parseFloat(newBalance);
+        
+       
+        
+      
+        const walletBalanceElement = document.querySelector('.wallet-balance');
+        if (walletBalanceElement) {
+            walletBalanceElement.textContent = `Rs.${numBalance.toFixed(2)}`;
+         
+        } else {
+            console.error('Wallet balance element not found');
+        }
+        
+        
+        const transactionsContainer = document.querySelector('div[style*="margin-left: 10%; margin-right: 10%"]');
+        
+        if (!transactionsContainer) {
+            console.error('Transactions container not found');
+            return;
+        }
+        
+        
+        const heading = transactionsContainer.querySelector('h5');
+        
+        if (!heading) {
+            console.error('Transaction heading not found');
+            return;
+        }
+        
+      
+        const newTransaction = document.createElement('div');
+        newTransaction.className = 'transaction-item d-flex justify-content-between align-items-center';
+        
+       
+        const currentDate = new Date();
+        const formattedDate = currentDate.toLocaleDateString('en-US', {
+            weekday: 'short',
+            month: 'short',
+            day: '2-digit',
+            year: 'numeric'
+        });
+        
+        
+        newTransaction.innerHTML = `
+            <div class="d-flex">
+                <div class="transaction-type mr-3">
+                    <span class="text-success">Credited</span>
+                </div>
+                <div class="transaction-amount mr-3">
+                    <h6>Rs. ${numAmount.toFixed(2)}</h6>
+                </div>
+                <p style="font-size:smaller">Added Rs. ${numAmount.toFixed(2)} to wallet</p>
+            </div>
+            <div class="transaction-date">
+                ${formattedDate}
+            </div>
+        `;
+        
+       
+        const divider = document.createElement('hr');
+        
+          const headingHR = heading.nextElementSibling;
+        
+        if (headingHR && headingHR.tagName === 'HR') {
+           
+            if (headingHR.nextElementSibling) {
+               
+                transactionsContainer.insertBefore(newTransaction, headingHR.nextElementSibling);
+                transactionsContainer.insertBefore(divider, newTransaction.nextElementSibling);
+            } else {
+                transactionsContainer.appendChild(newTransaction);
+                transactionsContainer.appendChild(divider);
+            }
+        } else {
+            if (heading.nextElementSibling) {
+                transactionsContainer.insertBefore(newTransaction, heading.nextElementSibling);
+                transactionsContainer.insertBefore(divider, newTransaction.nextElementSibling);
+            } else {
+                transactionsContainer.appendChild(newTransaction);
+                transactionsContainer.appendChild(divider);
+            }
+        }
+        
+        
+    }
+});
+</script>

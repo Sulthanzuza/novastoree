@@ -1,0 +1,55 @@
+body {
+  background-color: rgba(238, 229, 217, 1);
+}
+
+.product-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cart-item {
+  transition: all 0.3s ease;
+}
+
+.cart-empty {
+  padding: 30px;
+  text-align: center;
+}
+
+.loading {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+#cart-loading {
+  display: none;
+  text-align: center;
+  padding: 20px;
+}
+
+.action-buttons button {
+  transition: all 0.2s ease;
+}
+
+.action-buttons button:hover {
+  transform: scale(1.1);
+}
+
+.fade-out {
+  opacity: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+.price-flash {
+  animation: price-update 0.6s ease;
+}
+
+@keyframes price-update {
+  0% { color: inherit; }
+  50% { color: #28a745; }
+  100% { color: inherit; }
+}

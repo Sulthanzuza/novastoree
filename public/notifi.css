@@ -1,0 +1,55 @@
+.notification-banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--Neutral-Black-B900, #0e1422);
+    flex-direction: column;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .banner-content {
+    display: flex;
+    width: 294px;
+    max-width: 100%;
+    gap: 8px;
+    text-align: center;
+    height: 22px;
+  }
+
+  .promo-text {
+    color: var(--Neutral-White-W900, #fff);
+    font: 14px/25px Inter, sans-serif;
+    font-weight: 400;
+    flex-grow: 1;
+  }
+
+  .cta-link {
+    color: var(--Neutral-White-W900, #fff);
+    font: 14px/25px Inter, sans-serif;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .cta-link:hover,
+  .cta-link:focus {
+    text-decoration: underline;
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+
+  @media (max-width: 991px) {
+    .notification-banner {
+      padding: 0 10px;
+    }
+  }

@@ -1,0 +1,102 @@
+<head>
+    <link rel="stylesheet" href="/products.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <title>{{title}}</title>
+    </head>
+    {{>dashp}}
+<div class="products-containers">
+    <div class="layout-wrappers" style="height:105%">
+        <main class="main-contents">
+            <header class="headers">
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <span class="breadcrumb-text">Admin</span>
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/347fc193d0088dca0695d99147b3700ee95d8efb9ecfa3c2f8ce353113eebee3" alt="" />
+                    <span class="breadcrumb-text">Dashboard</span>
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/347fc193d0088dca0695d99147b3700ee95d8efb9ecfa3c2f8ce353113eebee3" alt="" />
+                    <span class="breadcrumb-text breadcrumb-active">Sales Report</span>
+                </nav>
+                <a class="logout-buttons" aria-label="Logout" href="/admin/logout">
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/434f453e4cc985013ba5977dc6c3ec92bd5cb52d93cf0e330a3970e94bfbd360" alt="" />
+                </a>
+            </header>
+
+            <section class="products-grid">
+                <div class="containerboxcat mt-4 p-4">
+                    <h3 class="fw-medium">Sales Report</h3>
+                    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+                        <div class="d-flex gap-2 align-items-center">
+                            <label for="filter">Filter by:</label>
+                            <select id="filter" class="form-select w-auto">
+                                <option value="daily">Daily</option>
+                                <option value="weekly">Weekly</option>
+                                <option value="monthly">Monthly</option>
+                                <option value="yearly">Yearly</option>
+                                <option value="custom">Custom Date</option>
+                            </select>
+                        </div>
+                        <div class="date-inputs d-none">
+                            <input type="date" id="startDate" class="form-control w-auto">
+                            <input type="date" id="endDate" class="form-control w-auto">
+                        </div>
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-primary" id="generateReport">
+                                <span class="button-text">Generate Report</span>
+                                <div class="spinner-border spinner-border-sm d-none" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </button>
+                            <button class="btn btn-success" id="downloadExcel">Download Excel</button>
+                            <button class="btn btn-danger" id="downloadPDF">Download PDF</button>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive mt-4">
+                        <table id="salesTable" class="table table-bordered text-center">
+                            <thead>
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>Sold</th>
+                                    <th>Returns</th>
+                                    <th>Offer Discounts</th>
+                                    <th data-bs-toggle="tooltip" data-bs-placement="top" 
+                        title="This is the price of the total products sold after offer discount.">
+                        Revenue (₹)
+                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each orders}}
+                                <tr>
+                                    <td>{{this.productName}} {{this.size}}</td>
+                                    <td>{{this.soldCount}}</td>
+                                    <td>{{this.returnedCount}}</td>
+                                    <td>₹{{this.offerDiscounts}}</td>
+                                    <td>₹{{this.revenue}}</td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="mt-4">
+                        <h5 id="discounts">Offer Discounts: ₹{{offerDiscounts}}</h5>
+                        <h5 id="coupon-discounts">Coupon Discounts: ₹{{couponDiscounts}}</h5>
+                        <h5 id="overall-sales-count">Overall Sales Count: {{overallSalesCount}}</h5>
+                        <h5 id="overall-order-amount">Order Count: {{orderCount}}</h5>
+                        <h5 id="overall-discount">Overall Discount: ₹{{overallDiscount}}</h5>
+                        <h5 id="net-revenue">Net Revenue: ₹{{netRevenue}}</h5>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.24/jspdf.plugin.autotable.min.js"></script>
+
+<script src="/js/salesReport.js"></script>

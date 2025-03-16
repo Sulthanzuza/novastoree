@@ -1,0 +1,137 @@
+
+
+.sidebar-container a {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px; 
+  }
+  
+  
+  .sidebar-container a.active {
+    font-weight: bold;
+    background-color: #f0f0f0; 
+    color: #007BFF; 
+  }
+  
+  
+  .sidebar-container a:hover {
+    text-decoration: underline;
+  }
+  
+  .sidebar-container {
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 17%; 
+    height: 100vh; 
+    display: flex;
+    flex-direction: column;
+    background-color: #fff; 
+    z-index: 1000; 
+  }
+  
+  .sidebar-content {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    padding: 1px 20px;
+    overflow: hidden;
+  }
+  
+  .logo-wrapper {
+    position: absolute;
+    margin: -4px 0 0 9px;
+  }
+  
+  .logo-image {
+    aspect-ratio: 1.08;
+    width: 52px;
+    background-blend-mode: multiply;
+  }
+  
+  .admin-text {
+    margin: 11px 0 auto 12px;
+    font-weight: 700;
+  }
+  
+  .nav-menu {
+    display: flex;
+    margin-top: 56px;
+    width: 100%;
+    gap:15px;
+    flex-direction: column;
+  }
+  
+  .nav-item {
+    border-radius: 8px;
+    display: flex;
+    width: 100%;
+    max-width: 212px;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+  }
+  
+  .nav-item.active {
+    background: var(--Neutral-White-W100, #ffffff);
+  }
+  
+  .nav-icon {
+    width: 20px;
+    height: 20px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .nav-icon img {
+    width: 18px; 
+    height: 18px;
+    stroke-width: 1.43px;
+    stroke: var(--Neutral-Black-B500, #5c5f6a);
+  }
+  
+  .nav-text {
+    color: var(--Neutral-Black-B500, #5c5f6a);
+    font: 500 14px/25px Inter, sans-serif;
+    text-decoration: none;
+  }
+  
+  .nav-text.active {
+    color: var(--Neutral-Black-B900, #0e1422);
+  }
+  
+  
+  .prod-item, .cat-item, .ord-item, .dash-item, .bar-item, .coup-item, .off-item, .rev-item, .set-item, .cus-item {
+    border-radius: 8px;
+    display: flex;
+    width: 100%;
+    max-width: 212px;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+  }
+  
+  .bar-item:hover,
+  .cat-item:hover,
+  .coup-item:hover,
+  .cus-item:hover,
+  .dash-item:hover,
+  .off-item:hover,
+  .ord-item:hover,
+  .prod-item:hover,
+  .rev-item:hover,
+  .set-item:hover {
+    background-color: #aaaaaa;
+    color: rgb(58, 58, 58);
+  }
+  
+  
+  .main-content {
+    margin-left: 17%;
+    padding: 20px;
+  }
+  

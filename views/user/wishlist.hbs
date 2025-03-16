@@ -1,0 +1,309 @@
+<link rel="stylesheet" href="/profile.css">
+<title>{{title}}</title>
+{{>header}}
+<div class="account-settings">
+  <div class="breadcrumb-container">
+    <div class="breadcrumb">My Account</div>
+  </div>
+  <div class="div">
+    <div class="div-2">
+      <div class="column">
+        <div class="nav-menu" style="margin-top: 0%;">
+          <div class="nav-menu">
+            <a href="/profile" class="dash-item" role="menuitem">
+              <span class="nav-icon">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/36d3139b558d31db9598872114ecb55879edd429326bba16ca12c3c8b6743ef0?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                  alt="Profile icon" />
+              </span>
+              <span class="nav-text">Profile</span>
+            </a>
+
+            <a href="/order" class="prod-item" role="menuitem">
+              <span class="nav-icon">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/395e632ba7027a03ce2c35c1aa8bcc4534da249d8c136cdcc01b5043a72ddc87?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                  alt="Orders icon" />
+              </span>
+              <span class="nav-text">Order</span>
+            </a>
+            <a href="/pending-order" class="prod-item" role="menuitem">
+            <span class="nav-icon">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/395e632ba7027a03ce2c35c1aa8bcc4534da249d8c136cdcc01b5043a72ddc87?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                alt="Orders icon" />
+            </span>
+            <span class="nav-text">Pending Order</span>
+          </a>
+
+            <a href="/wishlist" class="cat-item" role="menuitem">
+              <span class="nav-icon">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/8a28c72b03fe521e80b17a2210cccff5ffde375083a47fae478a483188a2bd02?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                  alt="Wishlist icon" />
+              </span>
+              <span class="nav-text">Wishlist</span>
+            </a>
+
+            <a href="/address" class="ord-item" role="menuitem">
+              <span class="nav-icon">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/a50f54cfc6598fef60cf27a23db31d7b328cf5d8d569954100ba71931392d542?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                  alt="Address icon" />
+              </span>
+              <span class="nav-text">Address</span>
+            </a>
+
+
+
+
+
+            <a href="/wallet" class="bar-item" role="menuitem">
+              <span class="nav-icon">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/10908ff884c9211705e8ffa2b601e07e65a50d110f2c30258724ccff7cdc8f6f?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                  alt="Wallet icon" />
+              </span>
+              <span class="nav-text">Wallet</span>
+            </a>
+
+
+
+            <a href="/logout" class="off-item" role="menuitem">
+              <span class="nav-icon">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/4f856bcd1032ee84fdc55e3f39d0250e6c0c4fb806bf9cd49f1b72879d1c95e8?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                  alt="Logout icon" width="24" height="24" loading="lazy">
+              </span>
+              <span class="nav-text">Logout</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="main">
+  <div class="container" style="width: 100%;">
+    <h1 class="text-center pb-4">WISHLIST</h1>
+{{#if wishlistItems.length}}
+{{#each wishlistItems}}
+  <div class="grid gap-1 d-flex justify-content-between border p-1 {{#if isOutOfStock}}out-of-stock{{/if}}">
+    <div class="col-2 text-center p-2">
+      <div>
+        <a href="/product/{{ productId._id}}/{{variantId}}">
+        <img style="width:100px" src="/uploads/{{productId.image.[0]}}" alt="{{productId.name}}"></a>
+      </div>
+    </div>
+    <div class="col-4 mt-3">
+      <p class="product-name">{{productId.name}}</p>
+      <p class="product-price">Quantity: {{variantDetails.size}}</p>
+    </div>
+
+    <div class="col-4 d-flex align-items-center">
+      {{#unless isOutOfStock}}
+        {{#if isInCart}}
+          <div class="p-2">
+            <a href="/cart">
+            <button class="btn btn-dark" style="border-color:#6c757d;" disabled>
+              Already in Cart
+            </button></a>
+          </div>
+        {{else}}
+          <div class="p-2">
+            <button class="btn btn-dark add-to-cart-btn" style="border-color:#6c757d;"
+                    data-product="{{productId._id}}" 
+                    data-variant="{{variantDetails._id}}">
+              Add To Cart
+            </button>
+          </div>
+        {{/if}}
+        {{else}}
+    <div class="p-2">
+        <button class="btn btn-danger" style="border-color:#dc3545;" disabled>
+            Out of Stock
+        </button>
+    </div>
+      {{/unless}}
+
+      <div class="p-2">
+        <button class="remove-wishlist-btn btn btn-outline-danger p-2" 
+         style="border-color:#6c757d;"
+                data-product="{{productId._id}}" 
+                data-variant="{{variantDetails._id}}">
+          <i class="bi bi-x"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+{{/each}}
+{{else}}
+  <!-- Show this message if no orders -->
+  <div class="text-center mt-4">
+    <h4>Wishlist is Empty</h4>
+    <p>Add the products you like to purchase</p>
+ 
+  </div>
+{{/if}}
+
+
+    <!-- Pagination if applicable -->
+    <div class="pagination">
+  {{#if totalPages}}
+    {{#if (gt currentPage 1)}}
+      <a href="?page={{subtract currentPage 1}}" class="page-link">Previous</a>
+    {{/if}}
+
+    {{#each (range 1 totalPages)}}
+      <a href="?page={{this}}" class="page-link {{#if (eq this ../currentPage)}}active{{/if}}">{{this}}</a>
+    {{/each}}
+
+    {{#if (lt currentPage totalPages)}}
+      <a href="?page={{add currentPage 1}}" class="page-link">Next</a>
+    {{/if}}
+  {{/if}}
+</div>
+
+  </div>
+</div>
+
+</div>
+</div>
+
+{{>footer}}
+
+
+<script>
+  document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+  button.addEventListener('click', async function() {
+    const productId = this.getAttribute('data-product');
+    const variantId = this.getAttribute('data-variant');
+    const itemContainer = this.closest('.grid');
+    
+    try {
+      const response = await fetch('/wishlist/add-to-cart', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ productId: productId, variantId: variantId })
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        
+        itemContainer.style.transition = 'opacity 0.5s ease';
+        itemContainer.style.opacity = '0';
+        
+        setTimeout(() => {
+          itemContainer.remove();
+          
+          
+          const remainingItems = document.querySelectorAll('.grid').length;
+          if (remainingItems === 0) {
+            const container = document.querySelector('.container');
+            container.innerHTML += '<div class="text-center mt-5"><h3>Your wishlist is empty</h3><p><a href="/shop" class="btn btn-dark mt-3">Continue Shopping</a></p></div>';
+          }
+          
+         
+          updatePagination();
+        }, 500);
+        
+        
+        Swal.fire({
+          icon: 'success',
+          title: result.message,
+          showConfirmButton: false,
+          timer: 1500
+        });
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: result.message,
+          confirmButtonText: 'OK'
+        });
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Something went wrong',
+        confirmButtonText: 'OK'
+      });
+    }
+  });
+});
+
+document.querySelectorAll('.remove-wishlist-btn').forEach(button => {
+  button.addEventListener('click', async function() {
+    const productId = this.getAttribute('data-product');
+    const variantId = this.getAttribute('data-variant');
+    const itemContainer = this.closest('.grid');
+    
+    try {
+      const response = await fetch('/wishlist/remove', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ productId: productId, variantId: variantId })
+      });
+
+      const result = await response.json();
+      if (result.success) {
+       
+        itemContainer.style.transition = 'opacity 0.5s ease';
+        itemContainer.style.opacity = '0';
+        
+        setTimeout(() => {
+          itemContainer.remove();
+          
+        
+          const remainingItems = document.querySelectorAll('.grid').length;
+          if (remainingItems === 0) {
+            const container = document.querySelector('.container');
+            container.innerHTML += '<div class="text-center mt-5"><h3>Your wishlist is empty</h3><p><a href="/shop" class="btn btn-dark mt-3">Continue Shopping</a></p></div>';
+          }
+          
+       
+          updatePagination();
+        }, 500);
+        
+       
+        Swal.fire({
+          icon: 'success',
+          title: result.message,
+          showConfirmButton: false,
+          timer: 1500
+        });
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: result.message,
+          confirmButtonText: 'OK'
+        });
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Something went wrong',
+        confirmButtonText: 'OK'
+      });
+    }
+  });
+});
+
+
+function updatePagination() {
+  const paginationElement = document.querySelector('.pagination');
+  if (!paginationElement) return;
+  
+  const currentItems = document.querySelectorAll('.grid').length;
+  const itemsPerPage = 10; 
+  
+ 
+  const currentPage = parseInt(new URLSearchParams(window.location.search).get('page') || '1');
+  if (currentItems === 0 && currentPage > 1) {
+    window.location.href = `?page=${currentPage - 1}`;
+  }
+}
+
+</script>

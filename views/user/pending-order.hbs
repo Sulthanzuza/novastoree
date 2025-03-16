@@ -1,0 +1,204 @@
+<link rel="stylesheet" href="/profile.css">
+
+<title>{{title}}</title>
+{{>header}}
+<div class="account-settings">
+  <div class="breadcrumb-container">
+    <div class="breadcrumb">My Account</div>
+  </div>
+  <div class="div">
+    <div class="div-2">
+      <div class="column">
+        <div class="nav-menu" style="margin-top: 0%;">
+          <div class="nav-menu">
+            <a href="/profile" class="dash-item" role="menuitem">
+              <span class="nav-icon">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/36d3139b558d31db9598872114ecb55879edd429326bba16ca12c3c8b6743ef0?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                  alt="Profile icon" />
+              </span>
+              <span class="nav-text">Profile</span>
+            </a>
+
+            <a href="/order" class="prod-item" role="menuitem">
+              <span class="nav-icon">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/395e632ba7027a03ce2c35c1aa8bcc4534da249d8c136cdcc01b5043a72ddc87?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                  alt="Orders icon" />
+              </span>
+              <span class="nav-text">Order</span>
+            </a>
+            <a href="/pending-order" class="prod-item" role="menuitem">
+            <span class="nav-icon">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/395e632ba7027a03ce2c35c1aa8bcc4534da249d8c136cdcc01b5043a72ddc87?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                alt="Orders icon" />
+            </span>
+            <span class="nav-text">Pending Order</span>
+          </a>
+
+            <a href="/wishlist" class="cat-item" role="menuitem">
+              <span class="nav-icon">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/8a28c72b03fe521e80b17a2210cccff5ffde375083a47fae478a483188a2bd02?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                  alt="Wishlist icon" />
+              </span>
+              <span class="nav-text">Wishlist</span>
+            </a>
+
+            <a href="/address" class="ord-item" role="menuitem">
+              <span class="nav-icon">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/a50f54cfc6598fef60cf27a23db31d7b328cf5d8d569954100ba71931392d542?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                  alt="Address icon" />
+              </span>
+              <span class="nav-text">Address</span>
+            </a>
+
+
+
+           
+
+            <a href="/wallet" class="bar-item" role="menuitem">
+              <span class="nav-icon">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/10908ff884c9211705e8ffa2b601e07e65a50d110f2c30258724ccff7cdc8f6f?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                  alt="Wallet icon" />
+              </span>
+              <span class="nav-text">Wallet</span>
+            </a>
+
+
+
+            <a href="/logout" class="off-item" role="menuitem">
+              <span class="nav-icon">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/4f856bcd1032ee84fdc55e3f39d0250e6c0c4fb806bf9cd49f1b72879d1c95e8?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                  alt="Logout icon" width="24" height="24" loading="lazy">
+              </span>
+              <span class="nav-text">Logout</span>
+            </a>
+          </div>
+        </div>
+      </div>
+<div class="main">
+  <div class="container" style="width: 100%;">
+    <h1 class="text-center pb-4">PENDING ORDERS</h1>
+{{#if orders.length}}
+    {{#each orders}}
+      <div class="grid gap-1 d-flex justify-content-between border bg-light p-3">
+        <div class="col-2 text-center p-2">
+          <div>
+            <img style="width:100px" src="/uploads/{{this.products.[0].image}}" alt="">
+          </div>
+        </div>
+        <div class="col-4">
+          <p class="product-name">{{this.products.[0].name}}</p>
+          <span class="order-date">Ordered on: {{formatDate this.createdAt}}</span>
+          <p class="product-price"> ₹{{this.total}}</p>
+        </div>
+        <div class="col-4 d-flex align-items-center">
+          <a href="/order-details/{{this._id}}">
+            <div class="p-2">
+              <button type="button" style="border-color:#5c5f6a;" class="btn btn-outline-primary px-3">View</button>
+            </div>
+          </a>
+          
+        <button style="border-color:#5c5f6a;" onclick="retryPayment('{{this._id}},{{this.orderNumber}}')" class="btn btn-outline-primary px-3">
+    Retry Payment
+</button></div>
+      </div>
+    {{/each}}
+{{else}}
+  <!-- Show this message if no orders -->
+  <div class="text-center mt-4">
+    <h4>No Pending Orders</h4>
+    <p>It looks like you have no pending orders at the moment.</p>
+    
+  </div>
+{{/if}}
+    <!-- Pagination -->
+    <div class="pagination">
+      {{#if (gt page 1)}}
+        <a href="/pending-order?page={{subtract page 1}}">Previous</a>
+      {{/if}}
+      {{#each (range 1 totalPages)}}
+        <a href="/pending-order?page={{this}}">{{this}}</a>
+      {{/each}}
+      {{#if (lt page totalPages)}}
+        <a href="/pending-order?page={{add page 1}}">Next</a>
+      {{/if}}
+    </div>
+  </div>
+</div>
+
+  </div>
+</div>
+</div>
+{{>footer}}
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+  function retryPayment(orderId, orderNumber) {
+    fetch(`/retry-payment`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ orderId })
+    })
+    .then(res => res.json())
+    .then(data => {
+    
+    if (data.success) {
+        initiateRetryRazorpayPayment(data);
+    } else {
+        Swal.fire({ icon: "error", title: "Payment Error", text: "Failed to create retry payment order." });
+    }
+})
+    .catch(error => {
+        console.error("Error retrying payment:", error);
+        Swal.fire({ icon: "error", title: "Payment Error", text: "An error occurred while retrying payment." });
+    });
+}
+
+function initiateRetryRazorpayPayment(order, orderNumber) {
+
+
+    const options = {
+        key: order.order.key,
+        amount: order.order.amount,
+        currency: "INR",
+        order_id: order.order.id,
+        handler: async function (response) {
+            try {
+                const verifyResponse = await fetch('/verify-retry-payment', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        razorpay_order_id: order.order.id,
+                        razorpay_payment_id: response.razorpay_payment_id,
+                        razorpay_signature: response.razorpay_signature,
+                        orderNumber: order.orderNumber
+                    })
+                });
+
+                const verifyData = await verifyResponse.json();
+
+                if (verifyData.success) {
+                    Swal.fire({ icon: "success", title: "Payment Successful", text: "Retry payment completed!" })
+                        .then(() => window.location.href = "/order-success");
+                } else {
+                    Swal.fire({ icon: "error", title: "Payment Failed", text: "Verification failed." });
+                }
+            } catch (error) {
+                console.error("Error verifying retry payment:", error);
+                Swal.fire({ icon: "error", title: "Payment Error", text: "An error occurred while verifying retry payment." });
+            }
+        },
+        theme: { color: "#3399cc" }
+    };
+
+    const rzp1 = new Razorpay(options);
+    rzp1.open();
+}
+
+</script>

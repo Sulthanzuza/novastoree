@@ -1,0 +1,139 @@
+
+.products-container {
+    background: var(--Neutral-White-W100, #f6f6f6);
+    padding: 0 48px 22px 0;
+    overflow: hidden;
+  }
+  
+  .layout-wrappers {
+    display: flex;
+    gap: 20px;
+    background-color: #E9E9EB;
+  }
+  .logout-buttons{
+    mix-blend-mode: multiply;
+    border-color: none;
+  }
+  
+  
+  .main-contents {
+    width: 100%;
+    margin-left: 20px;
+    margin-top: 20px;
+  }
+  
+  .headers {
+    display: flex;
+    width: 93%;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-left: 30px;
+    flex-wrap: wrap;
+  }
+  
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    float: left;
+  }
+  
+  .breadcrumb-text {
+    color: var(--Neutral-Black-B500, #5c5f6a);
+    font: 500 14px/25px Inter, sans-serif;
+  }
+  
+  .breadcrumb-active {
+    color: var(--Neutral-Black-B900, #0e1422);
+  }
+  .customers-table {
+  border-radius: 8px;
+  border: 1px solid #e9e9eb;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  width: 97%;
+  margin-top: 3%;
+  margin-bottom: 4%;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.table-title {
+  color: #0e1422;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.search-input {
+  display: flex;
+}
+
+.search-input input {
+  border-radius: 4px;
+}
+
+.table-column-headers {
+  display: flex;
+  justify-content: space-between;
+  background-color: #f6f6f6;
+  padding: 10px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.column-header {
+  width: 25%;
+  text-align: center;
+}
+
+.customer-rows {
+  display: flex;
+  flex-direction: column;
+}
+
+.customer-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 10px;
+  border-bottom: 1px solid #f6f6f6;
+  align-items: center;
+}
+
+.customer-name, .customer-email, .customer-status {
+  width: 25%;
+  text-align: center;
+}
+
+.customer-status.blocked {
+  background-color: rgba(255, 0, 0, 0.3);
+  color: red;
+  padding: 4px 12px;
+  border-radius: 4px;
+}
+
+.customer-status.active {
+  background-color: rgba(22, 192, 152, 0.38);
+  color: #00b087;
+  padding: 4px 12px;
+  border-radius: 4px;
+}
+
+.action-buttons {
+  text-align: center;
+}
+
+.delete-btn {
+  border-radius: 4px;
+  color: #dc3545;
+  border: 1px solid #dc3545;
+  padding: 8px 12px;
+  cursor: pointer;
+}

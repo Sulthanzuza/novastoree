@@ -1,0 +1,9 @@
+.nav-item {
+  border-radius: 8px;
+  display: flex;
+  width: 100%;
+  max-width: 212px;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+}

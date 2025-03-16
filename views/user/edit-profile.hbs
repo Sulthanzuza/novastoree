@@ -1,0 +1,146 @@
+<link rel="stylesheet" href="/profile.css">
+<title>{{title}}</title>
+
+{{>header}}
+<div class="account-settings">
+  <div class="breadcrumb-container">
+    <div class="breadcrumb">My Account</div>
+  </div>
+  <div class="div">
+    <div class="div-2">
+      <div class="column">
+              <!-- Navigation Menu -->
+      <div class="nav-menu">
+        <a href="/profile" class="dash-item" role="menuitem">
+          <span class="nav-icon">
+             <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/36d3139b558d31db9598872114ecb55879edd429326bba16ca12c3c8b6743ef0?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7" alt="Profile icon" />
+    </span>
+          <span class="nav-text">Profile</span>
+        </a>
+
+        <a href="/order" class="prod-item" role="menuitem">
+          <span class="nav-icon">
+             <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/395e632ba7027a03ce2c35c1aa8bcc4534da249d8c136cdcc01b5043a72ddc87?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7" alt="Orders icon" />
+    </span>
+          <span class="nav-text">Order</span>
+        </a>
+        <a href="/pending-order" class="prod-item" role="menuitem">
+            <span class="nav-icon">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/395e632ba7027a03ce2c35c1aa8bcc4534da249d8c136cdcc01b5043a72ddc87?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                alt="Orders icon" />
+            </span>
+            <span class="nav-text">Pending Order</span>
+          </a>
+
+        <a href="/wishlist" class="cat-item" role="menuitem">
+          <span class="nav-icon">
+             <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/8a28c72b03fe521e80b17a2210cccff5ffde375083a47fae478a483188a2bd02?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7" alt="Wishlist icon" />
+     </span>
+          <span class="nav-text">Wishlist</span>
+        </a>
+
+        <a href="/address" class="ord-item" role="menuitem">
+          <span class="nav-icon">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/a50f54cfc6598fef60cf27a23db31d7b328cf5d8d569954100ba71931392d542?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7" alt="Address icon" />
+    </span>
+          <span class="nav-text">Address</span>
+        </a>
+
+      
+
+        
+
+        <a href="/wallet" class="bar-item" role="menuitem">
+          <span class="nav-icon">
+           <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/10908ff884c9211705e8ffa2b601e07e65a50d110f2c30258724ccff7cdc8f6f?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7" alt="Wallet icon" />
+    </span>
+          <span class="nav-text">Wallet</span>
+        </a>
+
+        
+
+        <a href="/logout" class="off-item" role="menuitem">
+          <span class="nav-icon">
+              <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/4f856bcd1032ee84fdc55e3f39d0250e6c0c4fb806bf9cd49f1b72879d1c95e8?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7" alt="Logout icon" width="24" height="24" loading="lazy">
+       </span>
+          <span class="nav-text">Logout</span>
+        </a>
+      </div>
+      </div>
+        <div class="main" >
+        <h2 class="text-center">EditProfile</h2>
+        <div class="form-group-row " style="margin-left: 180px; margin-top:30px">
+<form action="" method="POST" id="signup-form" onsubmit="return validateForm()">
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label for="f-name" class="form-label">First Name</label>
+      <input type="text" id="f-name" name="firstName" class="form-control" value="{{user.firstName}}" required>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label for="l-name" class="form-label">Last Name</label>
+      <input type="text" id="l-name" name="lastName" class="form-control" value="{{#if user.lastName}}{{user.lastName}}{{else}}Not Set{{/if}}" required>
+    </div>
+  </div>
+  <div class="mb-3" style="margin-top:20px">
+    <label for="email" class="form-label">Email</label>
+    <input type="email" id="email" name="email" class="form-control" value="{{user.email}}" readonly>
+
+  </div>
+  <div class="mb-3" style="margin-top:20px">
+    <label for="number" class="form-label">Phone Number</label>
+    <input id="number" name="phoneNumber" class="form-control" value="{{#if user.phoneNumber}}{{user.phoneNumber}}{{else}}Not Set{{/if}}" required>
+  </div>
+
+  <button type="submit" class="btn btn-secondary w-100" style="margin-top:30px; border-color:rgb(145, 145, 145);">Edit Changes</button>
+</form>
+  
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{>footer}}
+
+
+<script>
+  function validateForm() {
+    const firstName = document.getElementById("f-name").value.trim();
+    const lastName = document.getElementById("l-name").value.trim();
+
+    const phoneNumber = document.getElementById("number").value.trim();
+
+
+    const phonePattern = /^\d{10}$/;
+
+
+    if (!firstName || !lastName ||  !phoneNumber) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Incomplete Fields',
+        text: 'All fields are required.',
+      });
+      return false;
+    }
+
+
+
+
+
+    if (!phonePattern.test(phoneNumber)) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Invalid Phone Number',
+        text: 'Phone number must be exactly 10 digits.',
+      });
+      return false;
+    }
+
+    Swal.fire({
+      icon: 'success',
+      title: 'Validation Successful',
+      text: 'Your changes have been saved!',
+    });
+    return true; 
+  }
+</script>

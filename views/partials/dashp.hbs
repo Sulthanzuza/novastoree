@@ -1,0 +1,98 @@
+<link rel="stylesheet" href="/adminPartials.css">
+  <aside class="sidebar-container">
+    <nav class="sidebar-content" aria-label="Main navigation">
+    
+      <div class="logo-wrapper">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/ae6922f86ccad00aa601790356ec7608608e0e8146d122e13c27214eea1c9c18?placeholderIfAbsent=true&apiKey=d7cebeeadab64378ab4fc611373387df" 
+             alt="Admin Logo" class="logo-image" />
+        <span class="admin-text">Admin</span>
+      </div>
+
+   
+      <div class="nav-menu">
+        <a href="/admin/dashboard" class="dash-item" role="menuitem">
+          <span class="nav-icon">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/f2c33cd64e755437aff94d15d19b6738bca5116cf12528182720d6cd16a64851?placeholderIfAbsent=true&apiKey=d7cebeeadab64378ab4fc611373387df" alt="Dashboard Icon" />
+          </span>
+          <span class="nav-text">Dashboard</span>
+        </a>
+
+        <a href="/admin/products" class="prod-item" role="menuitem">
+          <span class="nav-icon">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/d2b0088129a969ace5065f46e99666ccc1640d10cd8548eca08d7c9cd16f2a3b3?placeholderIfAbsent=true&apiKey=d7cebeeadab64378ab4fc611373387df" alt="Products Icon" />
+          </span>
+          <span class="nav-text">Products</span>
+        </a>
+
+        <a href="/admin/category" class="cat-item" role="menuitem">
+          <span class="nav-icon">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/c46200642d44aab62899b16a25fc8bfe94e9df6fede3e3512b370b3d4f514356?placeholderIfAbsent=true&apiKey=d7cebeeadab64378ab4fc611373387df" alt="Categories Icon" />
+          </span>
+          <span class="nav-text">Categories</span>
+        </a>
+
+        <a href="/admin/order" class="ord-item" role="menuitem">
+          <span class="nav-icon">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/395e632ba7027a03ce2c35c1aa8bcc4534da249d8c136cdcc01b5043a72ddc87?placeholderIfAbsent=true&apiKey=d7cebeeadab64378ab4fc611373387df" alt="Orders Icon" />
+          </span>
+          <span class="nav-text">Orders</span>
+        </a>
+
+      
+
+        <a href="/admin/customers" class="cus-item" role="menuitem">
+          <span class="nav-icon">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/683340f6a872ee519b0405f27647a21c60d91596d788d70140c87702eda3c386?placeholderIfAbsent=true&apiKey=d7cebeeadab64378ab4fc611373387df" alt="Customers Icon" />
+          </span>
+          <span class="nav-text">Customers</span>
+        </a>
+
+       
+
+        
+
+        <a href="/admin/offer" class="off-item" role="menuitem">
+          <span class="nav-icon">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/f2c33cd64e755437aff94d15d19b6738bca5116cf12528182720d6cd16a64851?placeholderIfAbsent=true&apiKey=d7cebeeadab64378ab4fc611373387df" alt="Offers Icon" />
+          </span>
+          <span class="nav-text">Offers</span>
+        </a>
+
+        <a href="/admin/coupon" class="coup-item" role="menuitem">
+          <span class="nav-icon">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/cabe95d2f5fab42e35aad96d91245b122dd4d50ddfe8d1d2bceee5ea219442d8?placeholderIfAbsent=true&apiKey=d7cebeeadab64378ab4fc611373387df" alt="Coupons Icon" />
+          </span>
+          <span class="nav-text">Coupons</span>
+        </a>
+         <a href="/admin/wallet" class="coup-item" role="menuitem">
+          <span class="nav-icon">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/cabe95d2f5fab42e35aad96d91245b122dd4d50ddfe8d1d2bceee5ea219442d8?placeholderIfAbsent=true&apiKey=d7cebeeadab64378ab4fc611373387df" alt="Coupons Icon" />
+          </span>
+          <span class="nav-text">Wallet</span>
+        </a>
+
+       
+
+        <a href="/admin/settings" class="set-item" role="menuitem">
+          <span class="nav-icon">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/5b4c30ca0a115c712594c2dce59791803bec209977f960ad8b2c1a3d2ecaac23?placeholderIfAbsent=true&apiKey=d7cebeeadab64378ab4fc611373387df" alt="Settings Icon" />
+          </span>
+          <span class="nav-text">Settings</span>
+        </a>
+      </div>
+    </nav>
+  </aside>
+
+<script > document.addEventListener("DOMContentLoaded", () => {
+  const navLinks = document.querySelectorAll(".sidebar-container a");
+  const currentPath = window.location.pathname;
+
+  navLinks.forEach(link => {
+    if (link.getAttribute("href") === currentPath) {
+      link.classList.add("active");
+    } else {
+      link.classList.remove("active");
+    }
+  });
+});
+  </script>

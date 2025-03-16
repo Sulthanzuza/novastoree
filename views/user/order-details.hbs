@@ -1,0 +1,392 @@
+<link rel="stylesheet" href="/profile.css">
+<title>{{title}}</title>
+{{>header}}
+<div class="account-settings">
+  <div class="breadcrumb-container">
+    <div class="breadcrumb">My Account</div>
+  </div>
+  <div class="div">
+    <div class="div-2">
+      <div class="column">
+        <div class="nav-menu" style="margin-top: 0%;">
+          <div class="nav-menu">
+            <a href="/profile" class="dash-item" role="menuitem">
+              <span class="nav-icon">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/36d3139b558d31db9598872114ecb55879edd429326bba16ca12c3c8b6743ef0?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                  alt="Profile icon" />
+              </span>
+              <span class="nav-text">Profile</span>
+            </a>
+
+            <a href="/order" class="prod-item" role="menuitem">
+              <span class="nav-icon">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/395e632ba7027a03ce2c35c1aa8bcc4534da249d8c136cdcc01b5043a72ddc87?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                  alt="Orders icon" />
+              </span>
+              <span class="nav-text">Order</span>
+            </a>
+            <a href="/pending-order" class="prod-item" role="menuitem">
+            <span class="nav-icon">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/395e632ba7027a03ce2c35c1aa8bcc4534da249d8c136cdcc01b5043a72ddc87?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                alt="Orders icon" />
+            </span>
+            <span class="nav-text">Pending Order</span>
+          </a>
+
+            <a href="/wishlist" class="cat-item" role="menuitem">
+              <span class="nav-icon">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/8a28c72b03fe521e80b17a2210cccff5ffde375083a47fae478a483188a2bd02?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                  alt="Wishlist icon" />
+              </span>
+              <span class="nav-text">Wishlist</span>
+            </a>
+
+            <a href="/address" class="ord-item" role="menuitem">
+              <span class="nav-icon">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/a50f54cfc6598fef60cf27a23db31d7b328cf5d8d569954100ba71931392d542?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                  alt="Address icon" />
+              </span>
+              <span class="nav-text">Address</span>
+            </a>
+
+
+
+           
+
+            <a href="/wallet" class="bar-item" role="menuitem">
+              <span class="nav-icon">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/10908ff884c9211705e8ffa2b601e07e65a50d110f2c30258724ccff7cdc8f6f?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                  alt="Wallet icon" />
+              </span>
+              <span class="nav-text">Wallet</span>
+            </a>
+
+
+
+            <a href="/logout" class="off-item" role="menuitem">
+              <span class="nav-icon">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets/TEMP/4f856bcd1032ee84fdc55e3f39d0250e6c0c4fb806bf9cd49f1b72879d1c95e8?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                  alt="Logout icon" width="24" height="24" loading="lazy">
+              </span>
+              <span class="nav-text">Logout</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="main">
+        <div class="container" style="width: 100%;">
+          <h1 class="text-center pb-4">ORDER DETAILS</h1>
+          <div style="margin-left:10%">
+            <h5 style="float:left:">Order Number: {{orderNumber}}</h5>
+            
+            <p>Order Placed On: {{createdAt}}</p>
+ {{#each products}}
+  <div class="order-details"><a href="/product/{{productId}}/{{variantId}}">
+    <img src="/uploads/{{this.image}}" alt="{{this.name}}"></a>
+    <div class="product-info" style="gap:10px;">
+      <h6>{{this.name}}</h6>
+      {{#each this.variants}}
+    <h6>Size: {{this.size}}, Qty: {{this.quantity}}</h6>
+    <h6>Price: {{subtract this.price (divide ../discount this.quantity)}}</h6>
+{{/each}}
+    </div>
+    <span class="status-text">
+  {{#if (eq this.productStatus "Return Approved")}}
+    Returned
+  {{else}}
+    {{this.productStatus}}
+  {{/if}}
+</span>
+
+
+    <!-- Cancel Button -->
+{{#if (or (eq this.productStatus "Pending") (eq this.productStatus "Processing"))}}
+  <button class="cancel-button btn "  style="border-color:rgb(26, 26, 26);"
+          onclick="confirmAction('/cancel-product/{{../orderId}}/{{this.productId}}/{{this.variantId}}', 'cancel')">
+Cancel
+  </button>
+{{/if}}
+
+{{#if (and (eq this.productStatus "Delivered"))}}
+  <button class="cancel-button btn" style="border-color:rgb(26, 26, 26);" 
+          onclick="confirmAction('/return-product/{{../orderId}}/{{this.productId}}/{{this.variantId}}', 'return')">
+    Return
+  </button>
+{{/if}}
+
+  </div>
+{{/each}}
+
+
+
+
+
+
+            <div style="margin-top:10%; float:left;">
+                <h5>Shipping Address</h5>
+                <h6 style="margin-top:2%;">{{shippingAddress.fullName}}</h6>
+                <h6>Phone Number: {{shippingAddress.phoneNumber}}</h6>
+                 <p>
+          {{shippingAddress.houseAddress}}, {{shippingAddress.streetAddress}} <br>
+          {{shippingAddress.city}}, {{shippingAddress.zipCode}} <br>
+          {{shippingAddress.state}}, {{shippingAddress.country}}
+        </p>
+            </div>
+            <div style="margin-top:7%; margin-left:60%;">
+              <div style="    background-color: #ddd;
+    width: 100%;
+    padding: 10%;">
+               <h6 >Sub total : Rs. {{this.subtotal}} </h6>
+                <h6>Discount : -Rs. {{this.discount}}  </h6>
+                <h6>Tax : Rs. {{this.tax}}</h6>
+                <h6>Total price  : Rs. {{this.total}}</h6>  
+</div>
+            </div>
+              
+          </div>
+           {{#unless (notCompleted products)}}
+  <button class="download-button" onclick="downloadInvoice('{{orderId}}')">
+    Download Invoice
+  </button>
+{{/unless}}
+
+          
+        
+      </div>
+    </div>
+  
+  </div>
+</div>
+</div>
+
+<div class="modal fade" id="cancelOrderModal" tabindex="-1" aria-labelledby="cancelOrderLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="cancelOrderLabel">Why are you canceling this product?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="cancelForm">
+          <input type="hidden" id="cancelUrl" value="">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="cancelReason" value="Ordered by mistake" required>
+            <label class="form-check-label">Ordered by mistake</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="cancelReason" value="Found a better price">
+            <label class="form-check-label">Found a better price</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="cancelReason" value="Delivery taking too long">
+            <label class="form-check-label">Delivery taking too long</label>
+          </div>
+          
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" id="confirmCancelBtn">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{>footer}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.11/jspdf.plugin.autotable.min.js"></script>
+
+
+
+
+<script>
+
+function confirmAction(url, actionType) {
+    if (actionType === "cancel") {
+        showCancelModal(url);
+    } else {
+        showReturnPrompt(url);
+    }
+}
+function showCancelModal(url) {
+    document.getElementById("cancelUrl").value = url;
+    var cancelModal = new bootstrap.Modal(document.getElementById("cancelOrderModal"));
+    cancelModal.show();
+}
+function showReturnPrompt(url) {
+    Swal.fire({
+        title: "Why are you returning this product?",
+        input: "text",
+        inputPlaceholder: "Enter your reason here...",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Submit",
+        preConfirm: (reason) => {
+            if (!reason) {
+                Swal.showValidationMessage("Please enter a reason for returning the product.");
+            }
+            return reason;
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            sendActionRequest(url, result.value, "Product returned successfully!");
+        }
+    });
+}
+
+function downloadInvoice(orderId) {
+  window.open(`/invoice/${orderId}`, "_blank");
+}
+
+
+function sendActionRequest(url, reason, successMessage) {
+    fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ reason })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.message) {
+            Swal.fire("Success!", successMessage, "success").then(() => {
+                
+                const actionType = url.includes('return-product') ? 'Returned' : 'Cancelled';
+                updateProductStatus(url, actionType);
+            });
+        } else {
+            Swal.fire("Error!", data.message || "Something went wrong!", "error");
+        }
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        Swal.fire("Error!", "Something went wrong!", "error");
+    });
+}
+
+function updateProductStatus(url, newStatus) {
+    
+    
+    
+    const urlParts = url.split('/');
+    const orderId = urlParts[urlParts.length - 3];
+    const productId = urlParts[urlParts.length - 2];
+    const variantId = urlParts[urlParts.length - 1];
+    
+   
+    const productElements = document.querySelectorAll('.order-details');
+    
+    productElements.forEach(element => {
+       
+        const buttons = element.querySelectorAll('button');
+        let productMatch = false;
+        
+        buttons.forEach(button => {
+            const onclick = button.getAttribute('onclick');
+            if (onclick && onclick.includes(orderId) && onclick.includes(productId) && onclick.includes(variantId)) {
+                productMatch = true;
+            }
+        });
+        
+        if (productMatch) {
+         
+            const statusElement = element.querySelector('.status-text');
+            if (statusElement) {
+                statusElement.textContent = newStatus;
+            }
+            
+            
+            buttons.forEach(button => {
+                button.remove();
+            });
+        }
+    });
+    
+   
+    updateDownloadInvoiceButton();
+}
+
+
+function updateDownloadInvoiceButton() {
+    const allProducts = document.querySelectorAll('.order-details');
+    let allCompleted = true;
+    let hasDelivered = false;
+    let allCancelledOrReturned = true;
+
+    allProducts.forEach(product => {
+        const status = product.querySelector('.status-text').textContent.trim();
+
+   
+        if (status === "Pending" || status === "Processing") {
+            allCompleted = false;
+        }
+
+       
+        if (status === "Delivered") {
+            hasDelivered = true;
+        }
+
+
+        if (status !== "Return Approved" && status !== "Cancelled") {
+            allCancelledOrReturned = false;
+        }
+    });
+
+    const downloadButton = document.querySelector('.download-button');
+    if (downloadButton) {
+     
+        if (allCompleted && hasDelivered && !allCancelledOrReturned) {
+            downloadButton.style.display = 'block';
+        } else {
+            downloadButton.style.display = 'none';
+        }
+    }
+}
+
+
+
+function showReturnPrompt(url) {
+    Swal.fire({
+        title: "Why are you returning this product?",
+        input: "text",
+        inputPlaceholder: "Enter your reason here...",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Submit",
+        preConfirm: (reason) => {
+            if (!reason) {
+                Swal.showValidationMessage("Please enter a reason for returning the product.");
+            }
+            return reason;
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            sendActionRequest(url, result.value, "Product return request submitted successfully!");
+        }
+    });
+}
+
+
+document.getElementById("confirmCancelBtn").addEventListener("click", function () {
+    const selectedReason = document.querySelector("input[name='cancelReason']:checked");
+    const cancelModal = bootstrap.Modal.getInstance(document.getElementById("cancelOrderModal"));
+
+    if (!selectedReason) {
+        Swal.fire("Error", "Please select a reason for cancellation!", "warning");
+        return;
+    }
+
+    sendActionRequest(document.getElementById("cancelUrl").value, selectedReason.value, "Product cancelled successfully!");
+    
+    
+    cancelModal.hide();
+});
+</script>

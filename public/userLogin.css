@@ -1,0 +1,66 @@
+body {
+  background-color: #f7f1e9;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.form-section {
+  height: 100vh;
+  margin-top:-50px
+}
+
+.login-container {
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width:850px;
+}
+
+.google-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-weight: bold;
+}
+
+
+
+.form-label {
+  font-weight: bold;
+  padding-left: 222px;
+}
+
+.text-muted {
+  font-size: 14px;
+}
+.login{
+  font-weight: bolder;
+  font-size: 30px;
+  margin-top: 45px;
+}
+
+.form-control{
+  width: 345px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.inpField{
+  padding-left: 222px;
+  width: 400px;
+}
+.for{
+  padding-left: 28rem;
+  
+}
+.btnn{
+  width: 570px;
+  padding-left: 222px;
+  
+}
+.google-icon {
+  width: 20px;
+  height: 20px;
+}

@@ -1,0 +1,178 @@
+<link rel="stylesheet" href="/profile.css">
+<title>{{title}}</title>
+
+{{>header}}
+<div class="account-settings">
+  <div class="breadcrumb-container">
+    <div class="breadcrumb">My Account</div>
+    
+  </div>
+  <div class="div">
+    <div class="div-2">
+      <div class="column">
+              <!-- Navigation Menu -->
+      <div class="nav-menu">
+        <a href="/profile" class="dash-item" role="menuitem">
+          <span class="nav-icon">
+             <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/36d3139b558d31db9598872114ecb55879edd429326bba16ca12c3c8b6743ef0?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7" alt="Profile icon" />
+    </span>
+          <span class="nav-text">Profile</span>
+        </a>
+
+        <a href="/order" class="prod-item" role="menuitem">
+          <span class="nav-icon">
+             <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/395e632ba7027a03ce2c35c1aa8bcc4534da249d8c136cdcc01b5043a72ddc87?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7" alt="Orders icon" />
+    </span>
+          <span class="nav-text">Order</span>
+        </a>
+        <a href="/pending-order" class="prod-item" role="menuitem">
+            <span class="nav-icon">
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/395e632ba7027a03ce2c35c1aa8bcc4534da249d8c136cdcc01b5043a72ddc87?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7"
+                alt="Orders icon" />
+            </span>
+            <span class="nav-text">Pending Order</span>
+          </a>
+
+        <a href="/wishlist" class="cat-item" role="menuitem">
+          <span class="nav-icon">
+             <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/8a28c72b03fe521e80b17a2210cccff5ffde375083a47fae478a483188a2bd02?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7" alt="Wishlist icon" />
+     </span>
+          <span class="nav-text">Wishlist</span>
+        </a>
+
+        <a href="/address" class="ord-item" role="menuitem">
+          <span class="nav-icon">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/a50f54cfc6598fef60cf27a23db31d7b328cf5d8d569954100ba71931392d542?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7" alt="Address icon" />
+    </span>
+          <span class="nav-text">Address</span>
+        </a>
+
+      
+
+        
+
+        <a href="/wallet" class="bar-item" role="menuitem">
+          <span class="nav-icon">
+           <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/10908ff884c9211705e8ffa2b601e07e65a50d110f2c30258724ccff7cdc8f6f?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7" alt="Wallet icon" />
+    </span>
+          <span class="nav-text">Wallet</span>
+        </a>
+
+        
+
+        <a href="/logout" class="off-item" role="menuitem">
+          <span class="nav-icon">
+              <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/4f856bcd1032ee84fdc55e3f39d0250e6c0c4fb806bf9cd49f1b72879d1c95e8?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7" alt="Logout icon" width="24" height="24" loading="lazy">
+       </span>
+          <span class="nav-text">Logout</span>
+        </a>
+      </div>
+      </div>
+        <div class="main" >
+<button class="btn btn-dark" style="margin-left:70%; margin-top:1%; border-color:rgb(146, 146, 146)" type="button" id="inviteUserBtn">Share your Refferal code</button>
+        <div class="form-group-row " style="margin-top:30px">
+ <div id="signup-form">
+    <div class="row">
+      
+         <div class="profile-picture" style="text-align: center; margin-bottom: 20px; ">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/36d3139b558d31db9598872114ecb55879edd429326bba16ca12c3c8b6743ef0?placeholderIfAbsent=true&apiKey=bfd1e8d24df44b7e977a461c081248c7" alt="Profile Picture" style="width: 70px; height: 70px; border-radius: 50%;" />
+          </div>
+        <div class="col-md-6 mb-3">
+            
+            <label for="f-name" class="form-label">First Name</label>
+            <h6 type="text" id="f-name" name="firstName" class="form">{{#if user.firstName}}{{user.firstName}}{{else}}Not Set{{/if}}</h6>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="l-name" class="form-label">Last Name</label>
+            <h6 type="text" id="l-name" name="lastName" class="form">{{#if user.lastName}}{{user.lastName}}{{else}}Not Set{{/if}}</h6>
+        </div>
+    </div>
+    <div class="mb-3" style="margin-top:15px">
+        <label for="email" class="form-label" >Email</label>
+        <h6 type="email" id="email" name="email" class="form">{{#if user.email}}{{user.email}}{{else}}Not Set{{/if}}</h6>
+    </div>
+    <div class="mb-3"  style="margin-top:20px">
+        <label for="number" class="form-label" >Phone Number</label>
+        <h6  id="number" name="mumber" class="form">{{#if user.phoneNumber}}{{user.phoneNumber}}{{else}}Not Set{{/if}}</h6>
+    </div>
+    <div style="margin-left:35%; ">
+<a href="/edit-profile"><button type="button" class="btn btn-dark" > Edit Profile</button></a></div>
+ <div style="margin-left:27%; margin-top:2%">
+<a href="/change-password"><button type="button" class="btn btn-dark" > Change Password</button></a></div>
+
+</div>
+
+  
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="referralModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="referralCode" >Your Referral Code</h5>
+                
+            </div>
+            <div class="modal-body">
+                <p><strong>Your Referral Code:</strong> <span id="referralCode"></span></p>
+                <p>🎉 <strong>Earn ₹50</strong> for every referral!</p>
+                <p>🛍️ Your friend gets <strong>20% OFF</strong> on their first order.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="close" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="copyReferralBtn">Copy Code</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{>footer}}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("inviteUserBtn").addEventListener("click", async function () {
+        try {
+            const response = await fetch('/referral', { method: 'GET' });
+
+            if (!response.ok) {
+                throw new Error("Failed to fetch referral code");
+            }
+
+
+            const data = await response.json();
+
+            document.getElementById("referralCode").innerText = data.referralCode;
+
+            
+            $("#referralModal").modal("show");
+
+        } catch (error) {
+            console.error("Error fetching referral code:", error);
+            alert("Failed to fetch referral code. Please try again."+error);
+        }
+    });
+
+
+document.querySelector("#close").addEventListener("click", function() {
+    $("#referralModal").modal("hide");
+
+});
+
+
+   
+    document.getElementById("copyReferralBtn").addEventListener("click", function () {
+        const referralCode = document.getElementById("referralCode").innerText;
+        navigator.clipboard.writeText(referralCode).then(() => {
+            Swal.fire("Referral code copied to clipboard!");
+        }).catch(err => {
+            console.error("Failed to copy text: ", err);
+        });
+    });
+});
+
+</script>
