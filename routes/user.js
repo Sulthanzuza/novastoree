@@ -15,7 +15,7 @@ const rateLimit = require('express-rate-limit');
 
 const authLimiter = rateLimit({
   windowMs: 10 * 60 * 1000, 
-  max: 5, 
+  max: 100, 
   handler: (req, res) => {
     res.status(429).render('user/error', { message: "Too many failed login attempts. Please try again later." });
   }
@@ -42,13 +42,13 @@ router.get('/reset',userController.loadReset)
 router.post('/reset',userController.resetPass)
 router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 router.get('/auth/google/callback', 
-  passport.authenticate('google', { failureRedirect: '/user/login' }),
+  passport.authenticate('google', { failureRedirect: '/login' }),
   (req, res) => {
     req.session.user = {
       id: req.user.id, 
       email: req.user.email,
     };
-    res.redirect('/user/home'); }
+    res.redirect('/'); }
 );
 
 
@@ -66,7 +66,7 @@ router.post('/change-password',profileController.changePassword)
 
 
 //home
-router.get('/home',auth.isLogin,userProductsController.loadHome)
+router.get('/',auth.isLogin,userProductsController.loadHome)
 
 
 

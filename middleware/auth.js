@@ -12,7 +12,7 @@ const checkSession = async (req, res, next) => {
           return res.redirect('/login'); 
         });
       } else {
-        return res.redirect('/home'); 
+        return res.redirect('/'); 
       }
     } catch (err) {
       console.error('Error checking user session:', err);
