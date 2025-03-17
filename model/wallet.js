@@ -16,6 +16,7 @@ const transactionSchema = mongoose.Schema({
         type: String,
         unique: true, 
         default: generateTransactionId,
+        required:true,
     },
     amount: {
         type: Number,

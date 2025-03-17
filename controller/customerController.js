@@ -242,7 +242,7 @@ const updateProductStatus = async (req, res) => {
           let wallet = await Wallet.findOne({ userId: order.userId });
 
           if (!wallet) {
-            wallet = new Wallet({ user_id: order.userId, balance: 0, transactions: [] });
+            wallet = new Wallet({ userId: order.userId, balance: 0, transactions: [] });
           }
 
           let refundAmount = product.variants[0].price * product.variants[0].quantity;

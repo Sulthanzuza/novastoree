@@ -105,7 +105,7 @@
 .products-list {
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* Four products per row */
-  gap: 20px; /* Adjust gap between cards */
+  gap: 10px; /* Adjust gap between cards */
   margin: 0 auto; /* Center the grid */
 }
 
@@ -115,7 +115,7 @@
   background: #fff;
   display: flex;
   flex-direction: column;
-  
+  width: 77%;
 }
 
 
