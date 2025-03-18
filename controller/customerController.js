@@ -114,11 +114,6 @@ Warm regards,
     
     await sendEmail(mailOptions);
 
-   
-    if (isBlocked) {
-      req.session.destroy();
-    }
-
     
     res.status(200).json({
       success: true,

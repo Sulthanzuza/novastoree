@@ -53,7 +53,7 @@ const registerUser = async (req, res) => {
             email,
             isReferred:refferalCode ? true : false,
             password: hashedPassword,
-            isBlocked: true, 
+           
             lastOtpSentAt: new Date(),
         });
         

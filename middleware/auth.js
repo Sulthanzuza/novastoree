@@ -5,12 +5,9 @@ const checkSession = async (req, res, next) => {
     try {
       const user = await User.findById(req.session.user.id); 
       if (user && user.isBlocked) {
-        req.session.destroy((err) => {
-          if (err) {
-            console.error('Error destroying session:', err);
-          }
-          return res.redirect('/login'); 
-        });
+       
+        delete req.session.user
+        return res.redirect('/login')
       } else {
         return res.redirect('/'); 
       }
@@ -29,12 +26,9 @@ const isLogin = async (req, res, next) => {
       const user = await User.findById(req.session.user.id); 
       
       if (user && user.isBlocked) {
-        req.session.destroy((err) => {
-          if (err) {
-            console.error('Error destroying session:', err);
-          }
-          return res.redirect('/login'); 
-        });
+      
+        delete req.session.user
+        return res.redirect('/login')
       } else {
         next(); 
       }
