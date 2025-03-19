@@ -10,6 +10,7 @@ const Category =require('../model/category')
   const addWishlist = async (req, res) => {
     try {
         const { productId, variantId } = req.body; 
+    
         const userId = req.session.user.id;
         
         
