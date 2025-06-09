@@ -516,14 +516,13 @@
     });
 
     
-    document.querySelectorAll('.reply-form').forEach(form => {
-        form.addEventListener('submit', async function (event) {
-            event.preventDefault();
-            const reviewId = this.getAttribute('data-review-id');
-            const replyText = this.querySelector('.reply-text').value.trim();
-
-           if (!replyText) {
+document.querySelectorAll('.reply-form').forEach(form => {
+    form.addEventListener('submit', async function (event) {
+        event.preventDefault();
+        const reviewId = this.getAttribute('data-review-id');
+        const replyText = this.querySelector('.reply-text').value.trim();
         
+        if (!replyText) {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -532,28 +531,58 @@
             return;
         }
 
-            try {
-                const response = await fetch(`/reviews/${reviewId}/reply`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ comment: replyText })
-                });
+        try {
+            const response = await fetch(`/reviews/${reviewId}/reply`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ comment: replyText })
+            });
 
-                if (response.ok) {
-                    location.reload(); 
-                } else {
-                    alert('Failed to add reply');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert('Something went wrong');
+            const data = await response.json();
+
+            if (data.redirectToLogin) {
+                
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Login Required',
+                    text: data.message,
+                    confirmButtonText: 'Go to Login'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = data.loginUrl;
+                    }
+                });
+            } else if (response.ok) {
+            
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: data.message,
+                    timer: 1500,
+                    showConfirmButton: false
+                }).then(() => {
+                    location.reload();
+                });
+            } else {
+                // Error occurred
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: data.message || 'Failed to add reply'
+                });
             }
-        });
+        } catch (error) {
+            console.error('Error:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Something went wrong. Please try again.'
+            });
+        }
     });
-        
-        
+});   
         const stars = document.querySelectorAll(".star");
         const ratingInput = document.getElementById("rating");
 

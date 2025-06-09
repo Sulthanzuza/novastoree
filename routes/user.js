@@ -66,17 +66,15 @@ router.post('/change-password',profileController.changePassword)
 
 
 //home
-router.get('/',auth.isLogin,userProductsController.loadHome)
+router.get('/',userProductsController.loadHome)
 
 
 
 
 //product details
-router.get('/product/:id/:variant_id',auth.isLogin,userProductsController.showProductDetails)
-router.get('/list-products',auth.isLogin,userProductsController.showListProducts)
+router.get('/product/:id/:variant_id',userProductsController.showProductDetails)
+router.get('/list-products',userProductsController.showListProducts)
 router.get('/search',auth.isLogin,profileController.showSearch)
-
-
 
 //address
 router.get('/add-address',profileController.showAddAddress)
@@ -157,7 +155,7 @@ router.get('/replies/:reviewId',auth.isLogin,reviewController.reply)
 
 
 //about
-router.get('/about',auth.isLogin,profileController.showAbout)
+router.get('/about',profileController.showAbout)
 router.get('/cart/count',auth.isLogin,profileController.cartCount)
 
 module.exports = router;

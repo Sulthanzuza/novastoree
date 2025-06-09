@@ -36,17 +36,28 @@ const submitReview = async (req, res) => {
 
 const addReply = async (req, res) => {
     const { reviewId } = req.params;
-        const { comment } = req.body;
-        const userId = req.session.user.id;
+    const { comment } = req.body;
+    
 
+    if (!req.session.user) {
+        return res.status(401).json({ 
+            message: 'Please login to reply to reviews.',
+            redirectToLogin: true,
+            loginUrl: '/login'
+        });
+    }
+    
+    const userId = req.session.user.id;
+    
     try {
-        
         const review = await Review.findById(reviewId);
         
+        if (!review) {
+            return res.status(404).json({ message: 'Review not found' });
+        }
         
-
         const user = await User.findById(userId);
-       
+        
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }

@@ -90,81 +90,88 @@ const showAddress = async (req, res) => {
 const addToCart = async (req, res) => {
   const { productId, variantId, quantity, variantSize, price, discountedPrice } = req.body;
   
-  
+  // Check if user is logged in
+  if (!req.session.user) {
+    return res.status(401).json({ 
+      error: 'Please login to add items to cart.',
+      redirectToLogin: true,
+      loginUrl: '/login'
+    });
+  }
   
   const userId = req.session.user.id;
-
+  
   try {
-      const product = await Product.findOne({ _id: productId, deleted: false });
-      if (!product) {
-          return res.status(404).json({ error: 'Product not found.' });
-      }
+    const product = await Product.findOne({ _id: productId, deleted: false });
+    if (!product) {
+        return res.status(404).json({ error: 'Product not found.' });
+    }
 
-      const variant = product.variants.find(v => v._id.toString() === variantId);
-      if (!variant) {
-          return res.status(404).json({ error: 'Variant not found.' });
-      }
+    const variant = product.variants.find(v => v._id.toString() === variantId);
+    if (!variant) {
+        return res.status(404).json({ error: 'Variant not found.' });
+    }
 
-      const stockAvailable = variant.quantity;
-      const maxAllowed = Math.min(5, stockAvailable); 
+    const stockAvailable = variant.quantity;
+    const maxAllowed = Math.min(5, stockAvailable);
 
-      let cart = await Cart.findOne({ user: userId });
-      let totalRequestedQuantity = parseInt(quantity);
+    let cart = await Cart.findOne({ user: userId });
+    let totalRequestedQuantity = parseInt(quantity);
 
-      if (cart) {
-          const existingProduct = cart.products.find(
-              item => item.product.toString() === productId && item.variant.size === variantSize
-          );
+    if (cart) {
+        const existingProduct = cart.products.find(
+            item => item.product.toString() === productId && item.variant.size === variantSize
+        );
 
-          if (existingProduct) {
-              totalRequestedQuantity += existingProduct.variant.quantity;
-          }
-      }
+        if (existingProduct) {
+            totalRequestedQuantity += existingProduct.variant.quantity;
+        }
+    }
 
-      if (totalRequestedQuantity > maxAllowed) {
-          return res.status(400).json({
-              error: `Only ${maxAllowed} items can be added.`,
-              swal: true 
-          });
-      }
+    if (totalRequestedQuantity > maxAllowed) {
+        return res.status(400).json({
+            error: `Only ${maxAllowed} items can be added.`,
+            swal: true
+        });
+    }
 
-      const cartItem = {
-          product: productId,
-          variant: {
-              size: variantSize,
-              price: price,
-              discountedPrice: discountedPrice, 
-              quantity: parseInt(quantity),
-          },
-          image: product.image && product.image.length > 0 ? product.image[0] : product.name,
-      };
+    const cartItem = {
+        product: productId,
+        variant: {
+            size: variantSize,
+            price: price,
+            discountedPrice: discountedPrice,
+            quantity: parseInt(quantity),
+        },
+        image: product.image && product.image.length > 0 ? product.image[0] : product.name,
+    };
 
-      if (cart) {
-          const existingProductIndex = cart.products.findIndex(
-              item => item.product.toString() === productId && item.variant.size === variantSize
-          );
+    if (cart) {
+        const existingProductIndex = cart.products.findIndex(
+            item => item.product.toString() === productId && item.variant.size === variantSize
+        );
 
-          if (existingProductIndex > -1) {
-              cart.products[existingProductIndex].variant.quantity += parseInt(quantity);
-          } else {
-              cart.products.push(cartItem);
-          }
-      } else {
-          cart = new Cart({
-              user: userId,
-              products: [cartItem],
-          });
-      }
+        if (existingProductIndex > -1) {
+            cart.products[existingProductIndex].variant.quantity += parseInt(quantity);
+        } else {
+            cart.products.push(cartItem);
+        }
+    } else {
+        cart = new Cart({
+            user: userId,
+            products: [cartItem],
+        });
+    }
 
-      await cart.save();
+    await cart.save();
 
-      res.status(200).json({
-          message: 'Product added to cart successfully!',
-          cartItem,
-      });
+    res.status(200).json({
+        message: 'Product added to cart successfully!',
+        cartItem,
+    });
   } catch (error) {
-      console.error('Error adding to cart:', error);
-      res.status(500).json({ error: 'An error occurred while adding the product to the cart.' });
+    console.error('Error adding to cart:', error);
+    res.status(500).json({ error: 'An error occurred while adding the product to the cart.' });
   }
 };
 

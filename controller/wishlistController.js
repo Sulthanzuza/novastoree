@@ -7,33 +7,35 @@ const Category =require('../model/category')
 
  
 
-  const addWishlist = async (req, res) => {
+const addWishlist = async (req, res) => {
     try {
-        const { productId, variantId } = req.body; 
-    
-        const userId = req.session.user.id;
+        const { productId, variantId } = req.body;
         
         
-       
-        if (!userId) {
-            return res.status(401).json({ success: false, message: "User not authenticated" });
+        const userId = req.session.user ? req.session.user.id : null;
+        const isGuest = !req.session.user && req.session.tempUser;
+        
+        
+        if (!userId || isGuest) {
+            return res.status(401).json({ 
+                success: false, 
+                message: "Please login to add items to wishlist",
+                redirect: "/login"
+            });
         }
-
         
         const product = await Product.findById(productId).populate('category');
         if (!product) {
             return res.status(404).json({ success: false, message: 'Product not found' });
         }
-
         
         const variant = product.variants.find(v => v._id.toString() === variantId);
         if (!variant) {
             return res.status(404).json({ success: false, message: 'Variant not found' });
         }
-
-    
+        
         const existingItem = await Wishlist.findOne({ userId, productId, variantId });
-
+        
         if (existingItem) {
             
             await Wishlist.findByIdAndDelete(existingItem._id);
@@ -45,7 +47,7 @@ const Category =require('../model/category')
                 productId,
                 variantId,
             });
-
+            
             await newWishlistItem.save();
             return res.status(201).json({ success: true, message: 'Added to wishlist' });
         }
