@@ -89,8 +89,7 @@ const addProduct = async (req, res) => {
     if (!name || !description || !category) {
       return res.status(400).send('All fields except offers are required.');
     }
-
-   
+              
     const variantNames = req.body.variant || [];
     const variantPrices = req.body.price || [];
     const variantQuantities = req.body.quantity || [];
